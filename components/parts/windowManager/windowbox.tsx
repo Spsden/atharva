@@ -1,20 +1,12 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
-let body;
-
-function windowbox() {
+export const TextComponent = () => {
   return (
-    <div>windowbox</div>
+   
+     <div>Lorem Ipsum is simply dummy text of the printing and typesetting
+    industry. Lorem Ipsum has been the industry's standard dummy text ever
+    since the 1500s, when an unknown printeitnc</div>
+   
+   
   )
 }
-
-
-function setup(){
-
-    body = document.body;
-    console.log(body);
-
-   
-}
-
-export default windowbox

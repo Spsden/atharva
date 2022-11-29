@@ -1,9 +1,13 @@
 import { strict } from "assert";
-import React from "react";
+import React, { Component, ReactNode } from "react";
 import { Rnd } from "react-rnd";
 import TitleBar from "../windowManager/titlebar";
+import { TextComponent } from "./windowbox";
 
-const Window = () => {
+const Window = ({
+  ChildComp,
+  title,
+}:{ChildComp:React.FC,title:string}) => {
   return (
     <Rnd
       className="lex align-center justify-center border-red-700"
@@ -22,25 +26,23 @@ const Window = () => {
           right: "5px",
           left: "5px",
           border: "solid black",
-          contain:'strict',
-          overflow:'hidden'
+          contain: "strict",
+          overflow: "hidden",
         }}
         className="flex flex-col border-neutral-300 h-full w-full rounded-xl "
       >
-        <TitleBar />
-
-        <div className="h-full w-full object-contain">
-          {" "}
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printeitnc
-        </div>
+        <TitleBar title={title} />
+        <ChildComp/>
       </div>
     </Rnd>
   );
 };
 
 export default Window;
+
+export const Dolo = () => {
+  return <div>Dolo</div>;
+};
 
 // export default class Window extends Component {
 //   xPos: number;
