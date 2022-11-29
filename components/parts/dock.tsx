@@ -48,7 +48,7 @@ function Dock() {
         right: "5px",
         left: "5px",
       }}
-      className="flex justify-between fixed bottom-0  items-center  mb-1  rounded-lg   drop-shadow-2xl h-13 p-0.5"
+      className="flex justify-between fixed bottom-0  items-center  mb-1 bg-gray-800/[0.1]  rounded-lg   drop-shadow-2xl h-13 p-0.5"
     >
       <div className="text-white align-center" >
         <p>🌤️Cloudy 22 ℃</p>
