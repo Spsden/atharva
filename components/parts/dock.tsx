@@ -3,33 +3,38 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addProcess } from "../utils/processes/store";
 import { InstalledApps } from "../utils/processes/alltypes";
-import uniqid from 'uniqid';
 
-let apps: { id: number; icon: string; name: string }[] = [
+
+let apps: InstalledApps[] = [
   {
-    id: 1,
+    id: "HAHA",
     icon: "https://i.imgur.com/CqvxoiW.png",
-    name: "start",
+    title: "start",
+    appPageUrl: "http://papertoilet.com/",
   },
   {
-    id: 2,
+    id: "HAHA",
     icon: "https://i.imgur.com/Whdx3HA.png",
-    name: "music",
+    title: "music",
+    appPageUrl:"https://www.jiosaavn.com/"
   },
   {
-    id: 3,
+    id: "haha",
     icon: "https://i.imgur.com/3cuHzpG.png",
-    name: "Explorer",
+    title: "Explorer",
+    appPageUrl :"http://papertoilet.com/"
   },
   {
-    id: 3,
+    id: "haha",
     icon: "https://i.imgur.com/V7W4MPv.png",
-    name: "Calculator",
+    title: "Calculator",
+    appPageUrl: "https://www.calculator.com/"
   },
   {
-    id: 4,
+    id: "haha",
     icon: "https://i.imgur.com/UAGCLm7.png",
-    name: "Photopea",
+    title: "Photopea",
+    appPageUrl:"https://www.photopea.com/"
   },
 ];
 
@@ -47,17 +52,18 @@ let right: { id: number; icon: string; name: string }[] = [
 ];
 
 function Dock() {
-  //const process = useSelector((state) => state.)
 
-  const duck: InstalledApps = {
-    appPageUrl: "https://www.photopea.com/",
-    icon: "https://i.imgur.com/UAGCLm7.png",
-    id: uniqid(),
-    title: "photopea",
-  };
+
+
 
   const dispatch = useDispatch();
-  const handelLaunch = (e: any) => {
+  const handelLaunch = (e: any,item:any) => {
+    const duck: InstalledApps = {
+      appPageUrl: item.appPageUrl,
+      icon: item.icon,
+      id: Date.now().toString(36) + Math.random().toString(36),
+      title: item.title,
+    };
     e.preventDefault();
     console.log("tapped");
     dispatch(addProcess(duck));
@@ -78,15 +84,15 @@ function Dock() {
       </div>
       <div>
         {apps.map(
-          (item: { id: number; icon: string; name: string }, i: number) => (
+          (item: { id: string; icon: string; title: string;appPageUrl:string }, i: number) => (
             <button
               onClick={(e) => {
-                handelLaunch(e);
+                handelLaunch(e,item);
 
                 //   console.log("tapped")
                 // dispatch(addProcess(duck));
               }}
-              key={item.name}
+              key={item.id}
               className={"w-11 m-1 hover:bg-slate-700 rounded-lg p-1"}
             >
               <img src={item.icon} alt="icon" />

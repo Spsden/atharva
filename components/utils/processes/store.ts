@@ -1,4 +1,5 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { stat } from "fs";
 import { InstalledApps } from "./alltypes";
 
 type InstalledAppsList = {
@@ -14,8 +15,7 @@ const processSlice = createSlice({
   initialState,
   reducers: {
     addProcess(state: InstalledAppsList, action: PayloadAction<InstalledApps>) {
-      // console.log("from provess");
-      // [...state.list, action.payload];
+    
       state.list.push(action.payload);
     },
     removeProcess(state: InstalledAppsList, action: PayloadAction<string>) {
