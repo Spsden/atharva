@@ -7,18 +7,11 @@ export default class Desktop extends Component {
   render() {
     return (
       <div>
-      
-       
         <BackgroundImage />
         <div className="text-white">
-        <ContentArea/>
-        <Dock />
-
+          <ContentArea />
+          <Dock />
         </div>
-        
-        
-        
-        
       </div>
     );
   }

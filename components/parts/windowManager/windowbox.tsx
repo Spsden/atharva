@@ -1,12 +1,21 @@
-import React, { ReactElement } from 'react'
+import React, { ReactElement } from "react";
 
-export const TextComponent = () => {
+export const TextComponent: React.FC<{ appUrl: string }> = ({
+  appUrl,
+}) => {
   return (
-   
-     <div>Lorem Ipsum is simply dummy text of the printing and typesetting
-    industry. Lorem Ipsum has been the industry's standard dummy text ever
-    since the 1500s, when an unknown printeitnc</div>
-   
-   
-  )
-}
+    <div className="h-full w-full flex flex-col bg-ub-cool-grey">
+      <iframe
+        src={appUrl}
+        className="flex-grow"
+        id="chrome-screen"
+        frameBorder="0"
+        title="Atharva browser"
+      ></iframe>
+    </div>
+  );
+};
+
+export const Test2 = () => {
+  return <div>Test2</div>;
+};

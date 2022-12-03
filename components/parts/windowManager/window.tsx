@@ -1,13 +1,14 @@
-import { strict } from "assert";
+
 import React, { Component, ReactNode } from "react";
 import { Rnd } from "react-rnd";
 import TitleBar from "../windowManager/titlebar";
 import { TextComponent } from "./windowbox";
 
+
 const Window = ({
-  ChildComp,
+  appPageUrl,
   title,
-}:{ChildComp:React.FC,title:string}) => {
+}:{appPageUrl:string,title:string}) => {
   return (
     <Rnd
       className="lex align-center justify-center border-red-700"
@@ -32,7 +33,7 @@ const Window = ({
         className="flex flex-col border-neutral-300 h-full w-full rounded-xl "
       >
         <TitleBar title={title} />
-        <ChildComp/>
+        <TextComponent appUrl={appPageUrl}/>
       </div>
     </Rnd>
   );
