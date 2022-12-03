@@ -1,8 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { removeProcess } from "../../utils/processes/store";
 
-const TitleBar: React.FC<{ title: string }> = ({ title }) => {
+const TitleBar: React.FC<{ title: string; id: string }> = ({ title, id }) => {
+  const dispatch = useDispatch();
+
   const handleClose = (e: any) => {
-    
+    e.preventDefault();
+   
+    dispatch(removeProcess(id));
   };
   return (
     <div

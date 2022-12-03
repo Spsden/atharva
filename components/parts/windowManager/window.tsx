@@ -8,7 +8,8 @@ import { TextComponent } from "./windowbox";
 const Window = ({
   appPageUrl,
   title,
-}:{appPageUrl:string,title:string}) => {
+  id,
+}:{appPageUrl:string,title:string,id:string}) => {
   return (
     <Rnd
       className="lex align-center justify-center border-red-700"
@@ -32,7 +33,7 @@ const Window = ({
         }}
         className="flex flex-col border-neutral-300 h-full w-full rounded-xl "
       >
-        <TitleBar title={title} />
+        <TitleBar title={title} id={id} />
         <TextComponent appUrl={appPageUrl}/>
       </div>
     </Rnd>

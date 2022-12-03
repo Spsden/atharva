@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+
 import { useDispatch } from "react-redux";
-import {addProcess} from '../utils/processes/store'
-import {InstalledApps} from '../utils/processes/alltypes'
-import { TextComponent } from "./windowManager/windowbox";
+import { addProcess } from "../utils/processes/store";
+import { InstalledApps } from "../utils/processes/alltypes";
+import uniqid from 'uniqid';
 
 let apps: { id: number; icon: string; name: string }[] = [
   {
@@ -47,26 +47,21 @@ let right: { id: number; icon: string; name: string }[] = [
 ];
 
 function Dock() {
-
   //const process = useSelector((state) => state.)
 
-  const duck : InstalledApps = {
-    appPageUrl:"https://www.photopea.com/",
-    icon:"https://i.imgur.com/UAGCLm7.png",
-    id:1,
-    title:"photopea"
+  const duck: InstalledApps = {
+    appPageUrl: "https://www.photopea.com/",
+    icon: "https://i.imgur.com/UAGCLm7.png",
+    id: uniqid(),
+    title: "photopea",
   };
 
-  const dispatch = useDispatch()
-  const handelLaunch = (e:any) => {
+  const dispatch = useDispatch();
+  const handelLaunch = (e: any) => {
     e.preventDefault();
-    console.log("tapped")
+    console.log("tapped");
     dispatch(addProcess(duck));
-   
-  }
-
-
-
+  };
 
   return (
     <div
@@ -86,14 +81,11 @@ function Dock() {
           (item: { id: number; icon: string; name: string }, i: number) => (
             <button
               onClick={(e) => {
-
                 handelLaunch(e);
-                
-                
-                
-              //   console.log("tapped")
-              // dispatch(addProcess(duck));
-            }}
+
+                //   console.log("tapped")
+                // dispatch(addProcess(duck));
+              }}
               key={item.name}
               className={"w-11 m-1 hover:bg-slate-700 rounded-lg p-1"}
             >

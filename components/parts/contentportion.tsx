@@ -22,12 +22,12 @@ function ContentArea() {
 
       {processes.map(
         (item: {
-          id: number;
+          id: string;
           appPageUrl: string;
           icon: string;
           title: string;
         }) => (
-          <Window appPageUrl={item.appPageUrl} title={item.title} />
+          <Window appPageUrl={item.appPageUrl} title={item.title} id={item.id} />
         )
       )}
     </div>
