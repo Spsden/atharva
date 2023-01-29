@@ -1,49 +1,112 @@
+import React from "react";
 
-import React, { Component, ReactNode } from "react";
-import { Rnd } from "react-rnd";
-import TitleBar from "../windowManager/titlebar";
 import { TextComponent } from "./windowbox";
+import TaskManager from "../../apps/taskManager";
 
+import dynamic from "next/dynamic";
+const WinBox = dynamic(() => import("react-winbox"), { ssr: false });
 
 const Window = ({
   appPageUrl,
   title,
   id,
-}:{appPageUrl:string,title:string,id:string}) => {
-  return (
-    <Rnd
-      className="lex align-center justify-center border-red-700"
-      default={{
-        x: 0,
-        y: 0,
-        width: 200,
-        height: 200,
-      }}
-      dragHandleClassName="dragarea"
-    >
-      <div
-        style={{
-          backdropFilter: "blur(30px)",
-          margin: "10px",
-          right: "5px",
-          left: "5px",
-          border: "solid black",
-          contain: "strict",
-          overflow: "hidden",
+  icon,
+  coreComponentId,
+  type,
+  closeCallBack,
+}: {
+  appPageUrl: string;
+  title: string;
+  id: string;
+  icon: string;
+  coreComponentId: string;
+  type: string;
+  closeCallBack: Function;
+}) => {
+  function closeHandler() {}
+
+  if(type != 'core'){
+    return (
+      <WinBox
+        id={id}
+        title={title}
+        width="500"
+        height={300}
+        x="center"
+        y={30}
+        url={appPageUrl}
+        icon={icon}
+        
+        onClose={()=>{
+          closeCallBack()
         }}
-        className="flex flex-col border-neutral-300 h-full w-full rounded-xl "
-      >
-        <TitleBar title={title} id={id} />
-        <TextComponent appUrl={appPageUrl}/>
-      </div>
-    </Rnd>
-  );
+      > 
+      {/* {(() => {
+                if (type == 'core'){
+                    return <TaskManager/>
+                }
+                
+                return <TextComponent appUrl={appPageUrl} />;
+              })()} */}
+       
+      </WinBox>
+    );
+
+  } else{
+    return (
+      <WinBox
+      id={id}
+      title={title}
+      width="500"
+      height={300}
+      x="center"
+      y={30}
+      
+      icon={icon}
+      //onClose={()=>{closeCallBack()}}
+    > 
+    <TaskManager/>
+  
+     
+    </WinBox>
+      
+    )
+  }
+
+
+  // <Rnd
+  //   className="lex align-center justify-center border-red-700"
+  //   default={{
+  //     x: 0,
+  //     y: 0,
+  //     width: 200,
+  //     height: 200,
+  //   }}
+  //   dragHandleClassName="dragarea"
+  // >
+  //   <div
+  //     style={{
+  //       backdropFilter: "blur(30px)",
+  //       margin: "10px",
+  //       right: "5px",
+  //       left: "5px",
+  //       border: "solid black",
+  //       contain: "strict",
+  //       overflow: "hidden",
+  //     }}
+  //     className="flex flex-col border-neutral-300 h-full w-full rounded-xl "
+  //   >
+  //     <TitleBar title={title} id={id} />
+  //     <TextComponent appUrl={appPageUrl}/>
+  //   </div>
+  // </Rnd>
+  // );
 };
 
 export default Window;
 
 export const Dolo = () => {
-  return <div>Dolo</div>;
+  return <div className="h-16 w-16">Dolo</div>;
 };
 
 // export default class Window extends Component {
