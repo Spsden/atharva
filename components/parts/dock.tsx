@@ -76,7 +76,7 @@ function Dock() {
     const duck: InstalledApps = {
       appPageUrl: item.appPageUrl,
       icon: item.icon,
-      id: Date.now().toString(36) + Math.random().toString(36),
+      id: item.id,
       type: item.type,
       coreComponentId: item.coreComponentId,
       title: item.title,
@@ -122,16 +122,30 @@ function Dock() {
             <button
               onClick={(e) => {
 
-                if(!isAppOpen){
-                  handelLaunch(e, item);
-                 
+                if(item.type == "core"){
+                  if(!isAppOpen){
+                    handelLaunch(e, item);
+                    isAppOpen = !isAppOpen
 
+                  } else {
+                    closeHandler(item.id)
+                    isAppOpen = !isAppOpen
+                  }
                 } else {
-                  if(item.type === "core")
-                  closeHandler(item.id)
+                  handelLaunch(e, item);
 
                 }
-                isAppOpen = !isAppOpen
+
+                // if(!isAppOpen){
+                //   handelLaunch(e, item);
+                 
+
+                // } else {
+                //   if(item.type === "core")
+                //   closeHandler(item.id)
+
+                // }
+                // isAppOpen = !isAppOpen
                
 
                 //   console.log("tapped")

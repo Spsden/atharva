@@ -16,7 +16,10 @@ function TaskManager() {
       {allProcesses.map((process) => (
         <>
           <h2>{process.title}</h2>
-          <p>{process.appPageUrl}{process.id}</p>
+          <p>{process.appPageUrl}</p>
+          <br/>
+          <p>{process.id}</p>
+          <br/>
         </>
       ))}
     </div>

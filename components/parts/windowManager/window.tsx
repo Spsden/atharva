@@ -1,7 +1,8 @@
 import React from "react";
-
 import dynamic from "next/dynamic";
 import { listOfFunctions, myMap } from "../../utils/processes/alltypes";
+import { WinBoxControlInfo } from "react-winbox";
+import { CLIENT_RENEG_LIMIT } from "tls";
 const WinBox = dynamic(() => import("react-winbox"), { ssr: false });
 
 const Window = ({
@@ -21,7 +22,18 @@ const Window = ({
   type: string;
   closeCallBack: Function;
 }) => {
-  function closeHandler() {}
+  //function closeHandler() {}
+
+  const customMinimize:WinBoxControlInfo = {
+    index: 420,
+    /** a name to identify the button, can also style it by using css, may starts with `wb-` */
+    class: "customMin",
+    /** an image resource same like icon prop */
+    image: "https://i.imgur.com/0HMFmZ7.png",
+    click: () => {
+      console.log("Custom min tapped")
+    }
+  }
 
   console.log(type);
 
@@ -38,6 +50,12 @@ const Window = ({
         x="center"
         y={30}
         icon={icon}
+        noMin= {true}
+        customControls = {[customMinimize]}
+        
+        // onMinimize= {() => {
+        //   console.log("miniize tapped")
+        // }}
         onClose={() => {
           closeCallBack();
         }}
