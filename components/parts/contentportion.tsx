@@ -26,7 +26,7 @@ function ContentArea() {
           icon: string;
           type:string;
           title: string;
-          coreComponentId:string
+          coreComponentId:number
 
         }) => (
           <Window

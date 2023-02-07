@@ -1,3 +1,4 @@
+import { StartMenu } from "../../apps/startMenu";
 import TaskManager from "../../apps/taskManager";
 
 export type InstalledApps = {
@@ -6,13 +7,17 @@ export type InstalledApps = {
   title: string;
   type:string;
   icon: string;
-  coreComponentId: string;
+  coreComponentId: number;
 };
 
-let myMap = new Map<string, Function>([
+export const myMap = new Map<string, Function>([
   ["taskmanager", TaskManager],
 
 ]);
 
+export const listOfFunctions: ((props: any) => JSX.Element)[] = [
+  StartMenu,
+  TaskManager,
+];
 
 

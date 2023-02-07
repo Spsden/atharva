@@ -1,60 +1,59 @@
 import React from "react";
 
 import { useDispatch } from "react-redux";
-import { addProcess } from "../utils/processes/store";
+import { addProcess, removeProcess } from "../utils/processes/store";
 import { InstalledApps } from "../utils/processes/alltypes";
 import TaskManager from "../apps/taskManager";
-import { Dolo } from "./windowManager/window";
-
+//import { Dolo } from "./windowManager/window";
 
 let apps: InstalledApps[] = [
   {
-    id: "HAHA",
+    id: "start_process",
     icon: "https://i.imgur.com/CqvxoiW.png",
     title: "start",
-    type:"thirdParty",
-    coreComponentId:"NULL",
+    type: "core",
+    coreComponentId: 0,
     appPageUrl: "http://www.google.com/",
   },
   {
-    id: "HAHA",
+    id: "music_process",
     icon: "https://i.imgur.com/Whdx3HA.png",
     title: "music",
-    type:"thirdParty",
-    coreComponentId:"NULL",
-    appPageUrl:"https://www.jiosaavn.com/"
+    type: "thirdParty",
+    coreComponentId: -1,
+    appPageUrl: "https://www.jiosaavn.com/",
   },
   {
-    id: "haha",
+    id: "explorer_process",
     icon: "https://i.imgur.com/3cuHzpG.png",
     title: "Explorer",
-    type:"thirdParty",
-    coreComponentId:"NULL",
-    appPageUrl :"http://papertoilet.com/"
+    type: "thirdParty",
+    coreComponentId: -1,
+    appPageUrl: "https://www.google.com/webhp?igu=1",
   },
   {
-    id: "haha",
+    id: "calc_process",
     icon: "https://i.imgur.com/V7W4MPv.png",
     title: "Calculator",
-    type:"thirdParty",
-    coreComponentId:"NULL",
-    appPageUrl: "https://www.calculator.com/"
+    type: "thirdParty",
+    coreComponentId: -1,
+    appPageUrl: "https://www.calculator.com/",
   },
   {
-    id: "haha",
+    id: "photopea_process",
     icon: "https://i.imgur.com/UAGCLm7.png",
     title: "Photopea",
-    type:"thirdParty",
-    coreComponentId:"NULL",
-    appPageUrl:"https://www.photopea.com/"
+    type: "thirdParty",
+    coreComponentId: -1,
+    appPageUrl: "https://www.photopea.com/",
   },
   {
-    id: "haha",
+    id: "taskmanager_process",
     icon: "https://i.imgur.com/4oiviWO.png",
     title: "Task Manager",
-    type:"core",
-    coreComponentId:"TaskManager",
-    appPageUrl:"https://www.photopea.com"
+    type: "coreApp",
+    coreComponentId: 1,
+    appPageUrl: "null",
   },
 ];
 
@@ -72,24 +71,28 @@ let right: { id: number; icon: string; name: string }[] = [
 ];
 
 function Dock() {
-
-
-
-
   const dispatch = useDispatch();
-  const handelLaunch = (e: any,item:any) => {
+  const handelLaunch = (e: any, item: any) => {
     const duck: InstalledApps = {
       appPageUrl: item.appPageUrl,
       icon: item.icon,
       id: Date.now().toString(36) + Math.random().toString(36),
-      type:item.type,
-      coreComponentId:item.coreComponentId,
+      type: item.type,
+      coreComponentId: item.coreComponentId,
       title: item.title,
     };
     e.preventDefault();
     console.log("tapped");
     dispatch(addProcess(duck));
   };
+
+  function closeHandler(id:string) {
+    console.log(id)
+      
+    dispatch(removeProcess(id));
+      
+  }
+  let isAppOpen = false;
 
   return (
     <div
@@ -106,10 +109,30 @@ function Dock() {
       </div>
       <div>
         {apps.map(
-          (item: { id: string; icon: string; title: string;appPageUrl:string }, i: number) => (
+          (
+            item: {
+              id: string;
+              icon: string;
+              title: string;
+              appPageUrl: string;
+              type:string;
+            },
+            i: number
+          ) => (
             <button
               onClick={(e) => {
-                handelLaunch(e,item);
+
+                if(!isAppOpen){
+                  handelLaunch(e, item);
+                 
+
+                } else {
+                  if(item.type === "core")
+                  closeHandler(item.id)
+
+                }
+                isAppOpen = !isAppOpen
+               
 
                 //   console.log("tapped")
                 // dispatch(addProcess(duck));

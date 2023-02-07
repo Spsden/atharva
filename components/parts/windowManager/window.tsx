@@ -1,9 +1,7 @@
 import React from "react";
 
-import { TextComponent } from "./windowbox";
-import TaskManager from "../../apps/taskManager";
-
 import dynamic from "next/dynamic";
+import { listOfFunctions, myMap } from "../../utils/processes/alltypes";
 const WinBox = dynamic(() => import("react-winbox"), { ssr: false });
 
 const Window = ({
@@ -19,14 +17,46 @@ const Window = ({
   title: string;
   id: string;
   icon: string;
-  coreComponentId: string;
+  coreComponentId: number;
   type: string;
   closeCallBack: Function;
 }) => {
   function closeHandler() {}
 
-  if(type != 'core'){
-    return (
+  console.log(type);
+
+  var appToShow;
+  if (type == "coreApp") {
+    console.log("incoreApp");
+
+    appToShow = (
+      <WinBox
+        id={id}
+        title={title}
+        width="500"
+        height={300}
+        x="center"
+        y={30}
+        icon={icon}
+        onClose={() => {
+          closeCallBack();
+        }}
+      >
+        <ComponentA index={coreComponentId} />
+      </WinBox>
+    );
+
+    return appToShow;
+  }
+
+  if (type == "core") {
+    console.log("incore");
+    appToShow = <ComponentA index={coreComponentId} />;
+    return appToShow;
+  } else {
+    console.log("inthird");
+
+    appToShow = (
       <WinBox
         id={id}
         title={title}
@@ -36,116 +66,42 @@ const Window = ({
         y={30}
         url={appPageUrl}
         icon={icon}
-        
-        onClose={()=>{
-          closeCallBack()
+        onClose={() => {
+          closeCallBack();
         }}
-      > 
-      {/* {(() => {
-                if (type == 'core'){
-                    return <TaskManager/>
-                }
-                
-                return <TextComponent appUrl={appPageUrl} />;
-              })()} */}
-       
-      </WinBox>
+      ></WinBox>
     );
-
-  } else{
-    return (
-      <WinBox
-      id={id}
-      title={title}
-      width="500"
-      height={300}
-      x="center"
-      y={30}
-      
-      icon={icon}
-      //onClose={()=>{closeCallBack()}}
-    > 
-    <TaskManager/>
-  
-     
-    </WinBox>
-      
-    )
+    return appToShow;
   }
 
-
-  // <Rnd
-  //   className="lex align-center justify-center border-red-700"
-  //   default={{
-  //     x: 0,
-  //     y: 0,
-  //     width: 200,
-  //     height: 200,
-  //   }}
-  //   dragHandleClassName="dragarea"
-  // >
-  //   <div
-  //     style={{
-  //       backdropFilter: "blur(30px)",
-  //       margin: "10px",
-  //       right: "5px",
-  //       left: "5px",
-  //       border: "solid black",
-  //       contain: "strict",
-  //       overflow: "hidden",
-  //     }}
-  //     className="flex flex-col border-neutral-300 h-full w-full rounded-xl "
-  //   >
-  //     <TitleBar title={title} id={id} />
-  //     <TextComponent appUrl={appPageUrl}/>
-  //   </div>
-  // </Rnd>
-  // );
+  //return appToShow;
 };
 
 export default Window;
 
-export const Dolo = () => {
-  return <div className="h-16 w-16">Dolo</div>;
+// export const Dolo = ({ id }: { id: string }) => {
+//   return (
+//     <div>
+//       <TaskManager />
+//     </div>
+//   );
+// };
+
+function getFunction(index: number): (props: any) => JSX.Element {
+  return listOfFunctions[index];
+}
+
+interface Props {
+  index: number;
+}
+
+const ComponentA: React.FC<Props> = ({ index }) => {
+  //const index = 0;
+  const SelectedFunction = getFunction(index);
+
+  return (
+    <div>
+      <SelectedFunction />
+    </div>
+  );
 };
-
-// export default class Window extends Component {
-//   xPos: number;
-//   yPos: number;
-//   width: string;
-//   height: string;
-//   childComp: FunctionComponent;
-
-//   constructor(
-//     props: {},
-//     x: number,
-//     y: number,
-//     width: string,
-//     height: string,
-//     childComp: FunctionComponent
-//   ) {
-//     super(props);
-//     this.xPos = x;
-//     this.yPos = y;
-//     this.width = width;
-//     this.height = height;
-//     this.childComp = childComp;
-//   }
-//   render() {
-//     return (
-//       <div>
-
-//         <section>
-//           <p>
-//             The World Wide Fund for Nature (WWF) is an international
-//             organization working on issues regarding the conservation, research
-//             and restoration of the environment, formerly named the World
-//             Wildlife Fund. WWF was founded in 1961.
-//           </p>
-
-//         </section>
-//         <div>{<>{this.childComp}</>}</div>
-//       </div>
-//     );
-//   }
-// }
