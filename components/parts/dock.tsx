@@ -3,8 +3,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { addProcess, removeProcess } from "../utils/processes/store";
 import { InstalledApps } from "../utils/processes/alltypes";
-import TaskManager from "../apps/taskManager";
-//import { Dolo } from "./windowManager/window";
 
 let apps: InstalledApps[] = [
   {
@@ -86,11 +84,10 @@ function Dock() {
     dispatch(addProcess(duck));
   };
 
-  function closeHandler(id:string) {
-    console.log(id)
-      
+  function closeHandler(id: string) {
+    console.log(id);
+
     dispatch(removeProcess(id));
-      
   }
   let isAppOpen = false;
 
@@ -115,41 +112,23 @@ function Dock() {
               icon: string;
               title: string;
               appPageUrl: string;
-              type:string;
+              type: string;
             },
             i: number
           ) => (
             <button
               onClick={(e) => {
-
-                if(item.type == "core"){
-                  if(!isAppOpen){
+                if (item.type == "core") {
+                  if (!isAppOpen) {
                     handelLaunch(e, item);
-                    isAppOpen = !isAppOpen
-
+                    isAppOpen = !isAppOpen;
                   } else {
-                    closeHandler(item.id)
-                    isAppOpen = !isAppOpen
+                    closeHandler(item.id);
+                    isAppOpen = !isAppOpen;
                   }
                 } else {
                   handelLaunch(e, item);
-
                 }
-
-                // if(!isAppOpen){
-                //   handelLaunch(e, item);
-                 
-
-                // } else {
-                //   if(item.type === "core")
-                //   closeHandler(item.id)
-
-                // }
-                // isAppOpen = !isAppOpen
-               
-
-                //   console.log("tapped")
-                // dispatch(addProcess(duck));
               }}
               key={item.id}
               className={"w-11 m-1 hover:bg-slate-700 rounded-lg p-1"}

@@ -1,12 +1,7 @@
 import React from "react";
-import {
-  removeProcess,
-  RootState,
-  selectProcess,
-} from "../utils/processes/store";
+import { RootState, selectProcess } from "../utils/processes/store";
 import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
-import { Dolo } from "../parts/windowManager/window";
-import { title } from "process";
+
 const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 function TaskManager() {
@@ -17,9 +12,9 @@ function TaskManager() {
         <>
           <h2>{process.title}</h2>
           <p>{process.appPageUrl}</p>
-          <br/>
+          <br />
           <p>{process.id}</p>
-          <br/>
+          <br />
         </>
       ))}
     </div>
