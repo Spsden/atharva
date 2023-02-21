@@ -1,4 +1,4 @@
-import { StartMenu } from "../../apps/startMenu";
+import { StartMenu } from "../../apps/startMenu/startMenu";
 import TaskManager from "../../apps/taskManager";
 
 export type InstalledApps = {

@@ -1,9 +1,13 @@
 import React from "react";
 
 import { useDispatch } from "react-redux";
-import { addProcess, removeProcess } from "../utils/processes/store";
+import { addProcess, removeProcess, RootState } from "../utils/processes/store";
 import { InstalledApps } from "../utils/processes/alltypes";
+import { useSelector } from "react-redux";
+import { TypedUseSelectorHook } from "react-redux";
 
+
+//const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 let apps: InstalledApps[] = [
   {
     id: "start_process",
@@ -69,6 +73,7 @@ let right: { id: number; icon: string; name: string }[] = [
 ];
 
 function Dock() {
+  //const allProcesses = useTypedSelector(selectProcess);
   const dispatch = useDispatch();
   const handelLaunch = (e: any, item: any) => {
     const duck: InstalledApps = {
@@ -120,9 +125,11 @@ function Dock() {
               onClick={(e) => {
                 if (item.type == "core") {
                   if (!isAppOpen) {
+                    console.log("open" + item.title)
                     handelLaunch(e, item);
                     isAppOpen = !isAppOpen;
                   } else {
+                    console.log("close" + item.title)
                     closeHandler(item.id);
                     isAppOpen = !isAppOpen;
                   }
@@ -133,6 +140,9 @@ function Dock() {
               key={item.id}
               className={"w-11 m-1 hover:bg-slate-700 rounded-lg p-1"}
             >
+              {
+                
+              }
               <img src={item.icon} alt="icon" />
             </button>
           )

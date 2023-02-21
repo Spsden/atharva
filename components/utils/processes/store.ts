@@ -1,5 +1,5 @@
 import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { stat } from "fs";
+
 import { InstalledApps } from "./alltypes";
 
 type InstalledAppsList = {
@@ -15,17 +15,29 @@ const processSlice = createSlice({
   initialState,
   reducers: {
     addProcess(state: InstalledAppsList, action: PayloadAction<InstalledApps>) {
-    
       state.list.push(action.payload);
     },
     removeProcess(state: InstalledAppsList, action: PayloadAction<string>) {
-      let index: number = state.list
-        .map((item) => {
-          return item.id;
-        })
-        .indexOf(action.payload);
+      let indexToDelete = -1;
 
-      state.list.splice(index, 1);
+      for (let i = 0; i < state.list.length; i++) {
+        if (state.list[i].id === action.payload) {
+          indexToDelete = i;
+          break;
+        }
+      }
+
+      if (indexToDelete != -1) {
+        state.list.splice(indexToDelete, 1);
+      }
+
+      // let index: number = state.list
+      //   .map((item) => {
+      //     return item.id;
+      //   })
+      //   .indexOf(action.payload);
+
+      //  state.list.splice(index, 1);
 
       // state.list.filter(anApp => anApp.id != action.payload);
       // console.log("from store" + action.payload + "\n");
