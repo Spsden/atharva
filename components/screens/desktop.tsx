@@ -9,7 +9,7 @@ export default class Desktop extends Component {
       <div overflow-hidden>
         <BackgroundImage />
         <div className="text-white">
-          <ContentArea />
+          <ContentArea  />
           <Dock />
         </div>
       </div>

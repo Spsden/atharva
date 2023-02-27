@@ -39,7 +39,7 @@ const Window = ({
 
   var appToShow;
   if (type == "coreApp") {
-    console.log("incoreApp");
+   // console.log("incoreApp");
 
     appToShow = (
       <WinBox
@@ -68,13 +68,13 @@ const Window = ({
   }
 
   if (type == "core") {
-    console.log("incore");
+   // console.log("incore");
     appToShow = 
    
     <ComponentA index={coreComponentId} />;
     return appToShow;
   } else {
-    console.log("inthird");
+    //console.log("inthird");
 
     appToShow = (
       <WinBox

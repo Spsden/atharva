@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useSelector,useDispatch } from "react-redux";
 import WinContainer from "./windowManager/winbox";
 import { removeProcess, RootState, selectProcess } from "../utils/processes/store";
 import Window from "./windowManager/window";
+import { useCloseCore } from "../../hooks/closeStartHook";
 
 const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -18,7 +19,9 @@ function ContentArea() {
   }
 
   return (   
-    <div>
+    <div 
+   
+    >
       {processes.map(
         (item: {
           id: string;

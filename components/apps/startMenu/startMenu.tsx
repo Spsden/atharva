@@ -1,109 +1,170 @@
 import React, { useState } from "react";
+import StartProjectDescription from "./startProjectDes";
 
-export let allProjects: Project[] = [
-  {
-    id: "1",
-    githubUrl: "www.github.com/Spsden/drip",
-    title: "Drip",
-    icon: "https://i.imgur.com/L3Ip1wh.png",
-    description: "lorem ipsum drip",
-  },
-  {
-    id: "2",
-    githubUrl: "www.github.com/Spsden/drip",
-    title: "Jott Notes",
-    icon: "https://i.imgur.com/p4vbIoE.png",
-    description: "lorem ipsum Jott Notes",
-  },
-  {
-    id: "3",
-    githubUrl: "www.github.com/Spsden/drip",
-    title: "RushApi",
-    icon: "https://i.imgur.com/sLlB7Qj.png",
-    description: "lorem ipsum RushApi",
-  },
-  {
-    id: "4",
-    githubUrl: "www.github.com/Spsden/drip",
-    title: "Obsy",
-    icon: "https://i.imgur.com/nEgIj0U.png",
-    description: "lorem ipsum Obsy",
-  },
-  {
-    id: "5",
-    githubUrl: "www.github.com/Spsden/drip",
-    title: "Daraz",
-    icon: "https://i.imgur.com/L3Ip1wh.png",
-    description: "lorem ipsum Daraz",
-  },
-];
 
 export const StartMenu = () => {
+  const [currentProj, setcurrentProj] = useState<number>(0);
 
-  const [currentDes,setcurrentDes]  = useState<string>("")
-
-  const descriptionHandler =(desc:string) => {
-    setcurrentDes(desc)
-    
-  }
+  const currentProjHandler = (index: number) => {
+    setcurrentProj(index);
+  };
   return (
     <div
       style={{
         backdropFilter: "blur(70px)",
       }}
-      className="w-5/12 h-4/6 m-2 absolute  overflow-y-auto  bottom-16 rounded-lg "
+      className="w-5/12 h-4/6 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50"
     >
-      <div className="grid grid-cols-2  gap-4">
-        <div className="">
-          <div className="sticky top-0 bg-red-900 ">
-            <h2>Projects</h2>
-          </div>
-          <ul className="">
-            {allProjects.map(
-              (
-                item: {
-                  id: string;
-                  icon: string;
-                  githubUrl: string;
-                  title: string;
-                  description:string;
-                  
-                },
-                i: number
-              ) => (
-                <li key={i} className="m-3" onClick={()=> {
-                  descriptionHandler(item.description)
+      <div className="w-2/5 float-left overflow-auto h-full">
+        <div className="sticky top-0 bg-red-900  ">
+          <h2>Projects</h2>
+        </div>
+        <ul className="">
+          {allProjects.map(
+            (
+              item: {
+                id: string;
+                icon: string;
+                githubUrl: string;
+                title: string;
+                description: string;
+              },
+              i: number
+            ) => (
+              <li
+                key={i}
+                className="m-3 hover:bg-sky-700"
+                onClick={() => {
+                  currentProjHandler(i);
+                }}
+              >
+                <div className="flex space-x-2">
+                  <img className="h-10 rounded-lg" src={item.icon} alt="icon" />
+                  <p>{item.title}</p>
+                </div>
+              </li>
+            )
+          )}
+        </ul>
+      </div>
 
-                }}>
-                  <div className="flex space-x-2">
-                    <img
-                      className="h-10 rounded-lg"
-                      src={item.icon}
-                      alt="icon"
-                    />
-                    <p>{item.title}</p>
-                  </div>
-                </li>
-              )
-            )}
-          </ul>
-        </div>
-        <div className="">
-          <div className="sticky top-0 bg-red-900 ">
-            <h2>Description</h2>
-           
-          </div>
-          <p>{currentDes}</p>
-        </div>
+      <div className=" overflow-auto h-full  ">
+        <StartProjectDescription {...allProjects[currentProj]} />
       </div>
     </div>
   );
 };
 
-export type Project = {
+export interface Project {
   id: string;
   githubUrl: string;
   title: string;
   icon: string;
+  techStack: TechStack[];
   description: string;
+}
+
+export type TechStack = {
+  icon: string;
+  name: string;
 };
+
+  export let allProjects: Project[] = [
+    {
+      id: "1",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "Drip",
+      techStack: [
+        { icon: "some link", name: "Android" },
+      {icon:'some link',name:'Flutter'},
+      {icon:'some link',name:'Dart'},
+      {icon:'some link',name:'Python',},
+      {icon:'some link',name:'Fluent design'},
+      {icon:'some link',name:'C/C++'}
+    ],
+      icon: "https://i.imgur.com/L3Ip1wh.png",
+      description: `Drip is a cross-platform youtube music client built using flutter. It has almost all features of Youtube music like music recommendation, search and playlist import. 
+      Drip uses Microsoft's fluent design language. The backend is built using python and flask. `,
+    },
+    {
+      id: "2",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "Jott Notes",
+      techStack: [
+        { icon: "some link", name: "Android" },
+        {icon:'some link',name:'Kotlin'},
+        {icon:'some link',name:'Java',},
+        {icon:'some link',name:'Material design'},
+        {icon:'some link',name:'MVVM'},
+        {icon:'some link',name:'Coroutines'}
+      ],
+      icon: "https://i.imgur.com/p4vbIoE.png",
+      description: `Jott notes is a Notes a android native app built using Kotlin and Xml Layouts. It uses MVVM architecture pattern along with room DB and coroutines. 
+      It has features like markdown text, themeing, multimedia attachments and Text to speech. Material design shared transition animations have also been implemented. `,
+    },
+    {
+      id: "3",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "RushApi",
+      techStack: [],
+      icon: "https://i.imgur.com/sLlB7Qj.png",
+      description: "lorem ipsum RushApi",
+    },
+    {
+      id: "4",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "Obsy",
+      techStack: [],
+      icon: "https://i.imgur.com/nEgIj0U.png",
+      description: "lorem ipsum Obsy",
+    },
+    {
+      id: "5",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "Daraz",
+      techStack: [],
+      icon: "https://i.imgur.com/L3Ip1wh.png",
+      description: "lorem ipsum Daraz",
+    },
+  
+    {
+      id: "1",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "Drip",
+      techStack: [],
+      icon: "https://i.imgur.com/L3Ip1wh.png",
+      description: "lorem ipsum drip",
+    },
+    {
+      id: "2",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "Jott Notes",
+      techStack: [],
+      icon: "https://i.imgur.com/p4vbIoE.png",
+      description: "lorem ipsum Jott Notes",
+    },
+    {
+      id: "3",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "RushApi",
+      techStack: [],
+      icon: "https://i.imgur.com/sLlB7Qj.png",
+      description: "lorem ipsum RushApi",
+    },
+    {
+      id: "4",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "Obsy",
+      techStack: [],
+      icon: "https://i.imgur.com/nEgIj0U.png",
+      description: "lorem ipsum Obsy",
+    },
+    {
+      id: "5",
+      githubUrl: "www.github.com/Spsden/drip",
+      title: "Daraz",
+      techStack: [],
+      icon: "https://i.imgur.com/L3Ip1wh.png",
+      description: "lorem ipsum Daraz",
+    },
+  ];

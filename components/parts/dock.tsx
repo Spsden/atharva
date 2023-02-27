@@ -5,6 +5,7 @@ import { addProcess, removeProcess, RootState } from "../utils/processes/store";
 import { InstalledApps } from "../utils/processes/alltypes";
 import { useSelector } from "react-redux";
 import { TypedUseSelectorHook } from "react-redux";
+import { useCloseCore } from "../../hooks/closeStartHook";
 
 
 //const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -96,15 +97,17 @@ function Dock() {
   }
   let isAppOpen = false;
 
+  const [coreStatus, handleCore] = useCloseCore();
+
   return (
     <div
       style={{
         backdropFilter: "blur(20px)",
         margin: "10px",
-        right: "5px",
-        left: "5px",
+        right: "3px",
+        left: "3px",
       }}
-      className="flex justify-between fixed bottom-0  items-center  mb-1 bg-gray-800/[0.1]  rounded-lg   drop-shadow-2xl h-13 p-0.5"
+      className="flex justify-between fixed bottom-0  items-center  mb-1  bg-stone-800/50  rounded-lg   drop-shadow-2xl h-13 p-0.5"
     >
       <div className="text-white align-center">
         <p>🌤️Cloudy 22 ℃</p>
@@ -124,15 +127,22 @@ function Dock() {
             <button
               onClick={(e) => {
                 if (item.type == "core") {
-                  if (!isAppOpen) {
-                    console.log("open" + item.title)
+                 
+
+                  if (!coreStatus) {
+                  
+                   // console.log("open" + item.title)
                     handelLaunch(e, item);
-                    isAppOpen = !isAppOpen;
+                    handleCore(true)
+                    console.log(coreStatus)
+                    //isAppOpen = !isAppOpen;
                   } else {
                     console.log("close" + item.title)
-                    closeHandler(item.id);
-                    isAppOpen = !isAppOpen;
+                   // closeHandler(item.id);
+                    handleCore(false);
+                    //isAppOpen = !isAppOpen;
                   }
+                  console.log(coreStatus + "from dock")
                 } else {
                   handelLaunch(e, item);
                 }
