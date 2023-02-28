@@ -30,8 +30,8 @@ const Window = ({
     class: "customMin",
     /** an image resource same like icon prop */
     image: "https://i.imgur.com/0HMFmZ7.png",
-    click: () => {
-     // console.log("Custom min tapped");
+    click: () => { 
+       console.log("Custom min tapped");
     },
   };
 
@@ -39,11 +39,11 @@ const Window = ({
 
   var appToShow;
   if (type == "coreApp") {
-   // console.log("incoreApp");
+    // console.log("incoreApp");
 
     appToShow = (
       <WinBox
-      key={id}
+        key={id}
         id={id}
         title={title}
         width="500"
@@ -52,6 +52,7 @@ const Window = ({
         y={30}
         icon={icon}
         noMin={true}
+        noFull={true}
         customControls={[customMinimize]}
         // onMinimize= {() => {
         //   console.log("miniize tapped")
@@ -68,10 +69,8 @@ const Window = ({
   }
 
   if (type == "core") {
-   // console.log("incore");
-    appToShow = 
-   
-    <ComponentA index={coreComponentId} />;
+    // console.log("incore");
+    appToShow = <ComponentA index={coreComponentId} />;
     return appToShow;
   } else {
     //console.log("inthird");
@@ -84,6 +83,9 @@ const Window = ({
         width="500"
         height={300}
         x="center"
+        noMin={true}
+        noFull={true}
+        customControls={[customMinimize]}
         y={30}
         url={appPageUrl}
         icon={icon}
@@ -99,14 +101,6 @@ const Window = ({
 };
 
 export default Window;
-
-// export const Dolo = ({ id }: { id: string }) => {
-//   return (
-//     <div>
-//       <TaskManager />
-//     </div>
-//   );
-// };
 
 function getFunction(index: number): (props: any) => JSX.Element {
   return listOfFunctions[index];

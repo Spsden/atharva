@@ -31,19 +31,7 @@ const processSlice = createSlice({
         state.list.splice(indexToDelete, 1);
       }
 
-      // let index: number = state.list
-      //   .map((item) => {
-      //     return item.id;
-      //   })
-      //   .indexOf(action.payload);
-
-      //  state.list.splice(index, 1);
-
-      // state.list.filter(anApp => anApp.id != action.payload);
-      // console.log("from store" + action.payload + "\n");
-      // state.list.forEach(
-      //   l =>  console.log(l.id)
-      // )
+      
     },
   },
 });

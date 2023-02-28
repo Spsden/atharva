@@ -1,35 +1,39 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
-import { addProcess, removeProcess, RootState } from "../utils/processes/store";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import {
+  addProcess,
+  removeProcess,
+  RootState,
+  selectProcess,
+} from "../utils/processes/store";
 import { InstalledApps } from "../utils/processes/alltypes";
-import { useSelector } from "react-redux";
-import { TypedUseSelectorHook } from "react-redux";
-import { useCloseCore } from "../../hooks/closeStartHook";
 
+import { useCloseCore } from "../../hooks/closeStartHook";
+const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 //const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 let apps: InstalledApps[] = [
   {
     id: "start_process",
-    icon: "https://i.imgur.com/CqvxoiW.png",
+    icon: "https://i.imgur.com/20NiE9m.png",
     title: "start",
     type: "core",
     coreComponentId: 0,
     appPageUrl: "http://www.google.com/",
   },
   {
-    id: "music_process",
+    id: "explorer_process",
     icon: "https://i.imgur.com/Whdx3HA.png",
-    title: "music",
+    title: "Explorer",
     type: "thirdParty",
     coreComponentId: -1,
     appPageUrl: "https://www.jiosaavn.com/",
   },
   {
-    id: "explorer_process",
-    icon: "https://i.imgur.com/3cuHzpG.png",
-    title: "Explorer",
+    id: "browser_process",
+    icon: "https://i.imgur.com/NUu0Ysa.png",
+    title: "Browser",
     type: "thirdParty",
     coreComponentId: -1,
     appPageUrl: "https://www.google.com/webhp?igu=1",
@@ -74,7 +78,7 @@ let right: { id: number; icon: string; name: string }[] = [
 ];
 
 function Dock() {
-  //const allProcesses = useTypedSelector(selectProcess);
+  const allProcesses = useTypedSelector(selectProcess);
   const dispatch = useDispatch();
   const handelLaunch = (e: any, item: any) => {
     const duck: InstalledApps = {
@@ -99,11 +103,21 @@ function Dock() {
 
   const [coreStatus, handleCore] = useCloseCore();
 
+  const existsInAllProcesses = (app: InstalledApps) => {
+    for (let index = 0; index < allProcesses.length; index++) {
+      if (allProcesses[index].id == app.id) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
   return (
     <div
       style={{
         backdropFilter: "blur(20px)",
-        margin: "10px",
+        margin: "5px",
         right: "3px",
         left: "3px",
       }}
@@ -113,50 +127,57 @@ function Dock() {
         <p>🌤️Cloudy 22 ℃</p>
       </div>
       <div>
-        {apps.map(
-          (
-            item: {
-              id: string;
-              icon: string;
-              title: string;
-              appPageUrl: string;
-              type: string;
-            },
-            i: number
-          ) => (
-            <button
-              onClick={(e) => {
-                if (item.type == "core") {
-                 
+        <ul className="list-none">
+          {apps.map(
+            (
+              item: InstalledApps,
 
-                  if (!coreStatus) {
-                  
-                   // console.log("open" + item.title)
-                    handelLaunch(e, item);
-                    handleCore(true)
-                    console.log(coreStatus)
-                    //isAppOpen = !isAppOpen;
-                  } else {
-                    console.log("close" + item.title)
-                   // closeHandler(item.id);
-                    handleCore(false);
-                    //isAppOpen = !isAppOpen;
-                  }
-                  console.log(coreStatus + "from dock")
-                } else {
-                  handelLaunch(e, item);
-                }
-              }}
-              key={item.id}
-              className={"w-11 m-1 hover:bg-slate-700 rounded-lg p-1"}
-            >
-              {
-                
-              }
-              <img src={item.icon} alt="icon" />
-            </button>
-          )
-        )}
+              // {
+              //   id: string;
+              //   icon: string;
+              //   title: string;
+              //   appPageUrl: string;
+              //   type: string;
+              // }
+
+              i: number
+            ) => (
+              <li
+                className={`inline  ${
+                  existsInAllProcesses(item) == true
+                    ? "bg-slate-700"
+                    : "bg-transparent"
+                }`}
+              >
+                <button
+                  onClick={(e) => {
+                    if (item.type == "core") {
+                      if (!coreStatus) {
+                        // console.log("open" + item.title)
+                        handelLaunch(e, item);
+                        handleCore(true);
+                        console.log(coreStatus);
+                        //isAppOpen = !isAppOpen;
+                      } else {
+                        console.log("close" + item.title);
+                        // closeHandler(item.id);
+                        handleCore(false);
+                        //isAppOpen = !isAppOpen;
+                      }
+                      console.log(coreStatus + "from dock");
+                    } else {
+                      handelLaunch(e, item);
+                    }
+                  }}
+                  key={item.id}
+                  className={"w-11 m-1 hover:bg-slate-700 rounded-lg p-1"}
+                >
+                  <img src={item.icon} alt="icon" />
+                </button>
+              </li>
+            )
+          )}
+        </ul>
       </div>
       <div className="hover:bg-slate-700 rounded-lg">
         {right.map(
