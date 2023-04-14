@@ -80,10 +80,11 @@ const Window = ({
         id={id}
         key={id}
         title={title}
-        width="500"
-        height={300}
+        width="700"
+        height={600}
         x="center"
-        noMin={true}
+       // onMinimize={() => console.log("heyyeye")}
+         noMin={true}
         noFull={true}
         customControls={[customMinimize]}
         y={30}

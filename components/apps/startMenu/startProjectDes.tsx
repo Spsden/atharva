@@ -1,5 +1,6 @@
 import React from "react";
 import { allProjects, Project } from "./startMenu";
+import Image from "next/image";
 
 const StartProjectDescription = (props: Project) => {
   return (
@@ -22,12 +23,12 @@ const StartProjectDescription = (props: Project) => {
         <br />
 
         <h2 className="text-lg font-bold">Tech Stack</h2>
-        <ul>
+        <ul className="">
           {props.techStack.map((item: {
             icon:string;
             name:string
           }, i: number) => (
-            <li>{item.name}</li>
+            <li className="my-1.5 inline-block m-5"><div className="flex space-x-1.5 > * + *"><img src={item.icon} alt="NA" width={30} height={30}/> <p> {item.name}</p></div></li>
           ))}
         </ul>
       </div>

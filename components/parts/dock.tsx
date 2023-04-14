@@ -143,11 +143,7 @@ function Dock() {
               i: number
             ) => (
               <li
-                className={`inline  ${
-                  existsInAllProcesses(item) == true
-                    ? "bg-slate-700"
-                    : "bg-transparent"
-                }`}
+                className={ (existsInAllProcesses(item) ? "bg-lime-800" : "bg-transparent") + " inline "}
               >
                 <button
                   onClick={(e) => {
