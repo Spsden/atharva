@@ -143,7 +143,11 @@ function Dock() {
               i: number
             ) => (
               <li
-                className={ (existsInAllProcesses(item) ? "bg-lime-800" : "bg-transparent") + " inline "}
+                className={
+                  (existsInAllProcesses(item)
+                    ? "bg-lime-800"
+                    : "bg-transparent") + " inline "
+                }
               >
                 <button
                   onClick={(e) => {

@@ -23,3 +23,8 @@ export interface IconData {
   path: ReactNode;
   name: string;
 }
+
+export interface contextMenuItems {
+  title:string;
+  id:number;
+}
