@@ -22,9 +22,9 @@ function ContentArea() {
   }
 
   return (
+  
     <div>
-
-      <ContextMenu/>
+      <ContextMenu />
 
       <div>
         {processes.map(
