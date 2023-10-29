@@ -22,21 +22,15 @@ function ContentArea() {
   }
 
   return (
-  
     <div>
       {/* <ContextMenu /> */}
 
       <div>
-        {processes.map(
-          (item: {
-            id: string;
-            appPageUrl: string;
-            icon: string;
-            type: string;
-            title: string;
-            coreComponentId: number;
-          }) => (
-            <Window
+        <ul>
+          {processes.map((item) => (
+            <li key={item.id}>
+               <Window
+              key={item.id}
               appPageUrl={item.appPageUrl}
               title={item.title}
               id={item.id}
@@ -47,8 +41,10 @@ function ContentArea() {
                 closeHandler(item.id);
               }}
             />
-          )
-        )}
+            </li>
+           
+          ))}
+        </ul>
       </div>
     </div>
   );

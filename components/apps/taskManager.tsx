@@ -8,15 +8,43 @@ function TaskManager() {
   const allProcesses = useTypedSelector(selectProcess);
   return (
     <div>
-      {allProcesses.map((process) => (
-        <>
-          <h2>{process.title}</h2>
-          <p>{process.appPageUrl}</p>
-          <br />
-          <p>{process.id}</p>
-          <br />
-        </>
-      ))}
+      <ul>
+        {allProcesses.map((process) => (
+          <li>
+            <TaskCard
+              processID={process.id}
+              processIcon={process.icon}
+              processName={process.title}
+              processType={process.type}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+interface processParams {
+  processIcon: string;
+  processName: string;
+  processType: string;
+  processID: string;
+}
+
+function TaskCard({
+  processIcon,
+  processName,
+  processType,
+  processID,
+}: processParams) {
+  return (
+    <div>
+      <div>{processIcon}</div>
+      <div>{processName}</div>
+      <div>{processType}</div>
+      <div>
+        <button>End</button>
+      </div>
     </div>
   );
 }

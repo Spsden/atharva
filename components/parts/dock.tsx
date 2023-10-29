@@ -92,6 +92,7 @@ function Dock() {
     e.preventDefault();
     console.log("tapped");
     dispatch(addProcess(duck));
+    
   };
 
   function closeHandler(id: string) {

@@ -17,6 +17,8 @@ const processSlice = createSlice({
     addProcess(state: InstalledAppsList, action: PayloadAction<InstalledApps>) {
       state.list.push(action.payload);
     },
+
+
     removeProcess(state: InstalledAppsList, action: PayloadAction<string>) {
       let indexToDelete = -1;
 
@@ -27,12 +29,17 @@ const processSlice = createSlice({
         }
       }
 
+
+
       if (indexToDelete != -1) {
         state.list.splice(indexToDelete, 1);
       }
 
       
     },
+
+
+    
   },
 });
 

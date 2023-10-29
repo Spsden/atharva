@@ -51,7 +51,7 @@ const Window = ({
         x="center"
         y={30}
         icon={icon}
-        noMin={true}
+        //noMin={true}
         noFull={true}
         customControls={[customMinimize]}
         // onMinimize= {() => {
@@ -84,7 +84,7 @@ const Window = ({
         height={600}
         x="center"
        // onMinimize={() => console.log("heyyeye")}
-         noMin={true}
+        // noMin={true}
         noFull={true}
         customControls={[customMinimize]}
         y={30}
