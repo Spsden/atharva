@@ -131,15 +131,6 @@ function Dock() {
           {apps.map(
             (
               item: InstalledApps,
-
-              // {
-              //   id: string;
-              //   icon: string;
-              //   title: string;
-              //   appPageUrl: string;
-              //   type: string;
-              // }
-
               i: number
             ) => (
               <li
@@ -167,7 +158,7 @@ function Dock() {
                       }
                       console.log(coreStatus + "from dock");
                     } else {
-                      handelLaunch(e, item);
+                      if (!existsInAllProcesses(item)) handelLaunch(e, item);
                     }
                   }}
                   key={item.id}
