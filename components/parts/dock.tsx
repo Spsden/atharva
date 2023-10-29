@@ -92,7 +92,6 @@ function Dock() {
     e.preventDefault();
     console.log("tapped");
     dispatch(addProcess(duck));
-    
   };
 
   function closeHandler(id: string) {
@@ -144,11 +143,12 @@ function Dock() {
               i: number
             ) => (
               <li
-                className={
-                  (existsInAllProcesses(item)
-                    ? "bg-lime-800"
-                    : "bg-transparent") + " inline "
-                }
+                className="inline"
+                // {
+                //   (existsInAllProcesses(item)
+                //     ? "bg-[#2563eb] w-10 m-1 rounded-lg p-0.5"
+                //     : "bg-transparent") + " inline "
+                // }
               >
                 <button
                   onClick={(e) => {
@@ -171,7 +171,9 @@ function Dock() {
                     }
                   }}
                   key={item.id}
-                  className={"w-11 m-1 hover:bg-slate-700 rounded-lg p-1"}
+                  className={`w-11 m-1 hover:bg-slate-700 rounded-lg p-1 ${
+                    existsInAllProcesses(item) ? "bg-slate-700" : ""
+                  }`}
                 >
                   <img src={item.icon} alt="icon" />
                 </button>
