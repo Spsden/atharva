@@ -38,12 +38,22 @@ function TaskCard({
   processID,
 }: processParams) {
   return (
-    <div>
-      <div>{processIcon}</div>
-      <div>{processName}</div>
-      <div>{processType}</div>
-      <div>
-        <button>End</button>
+    <div className="bg-white p-1 rounded-lg shadow-md m-2">
+      <div className="flex justify-between items-center">
+        <div>
+          <img
+            className="h-6 rounded-lg"
+            src={processIcon}
+            alt="Process Icon"
+          />
+        </div>
+        <div>{processName}</div>
+        <div>{processType}</div>
+        <div>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            End
+          </button>
+        </div>
       </div>
     </div>
   );
