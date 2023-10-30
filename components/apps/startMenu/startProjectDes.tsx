@@ -28,7 +28,7 @@ const StartProjectDescription = (props: Project) => {
             icon:string;
             name:string
           }, i: number) => (
-            <li className="my-1.5 inline-block m-5"><div className="flex space-x-1.5 > * + *"><img src={item.icon} alt="NA" width={30} height={30}/> <p> {item.name}</p></div></li>
+            <li key={i} className="my-1.5 inline-block m-5"><div className="flex space-x-1.5 > * + *"><img src={item.icon} alt="NA" width={30} height={30}/> <p> {item.name}</p></div></li>
           ))}
         </ul>
       </div>

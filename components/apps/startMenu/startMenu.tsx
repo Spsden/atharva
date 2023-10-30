@@ -1,20 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import StartProjectDescription from "./startProjectDes";
+import { useCloseCore } from "../../../hooks/closeStartHook";
+import { useTransition } from "react-transition-state";
 
 export const StartMenu = () => {
   const [currentProj, setcurrentProj] = useState<number>(0);
+  const [coreStatus, handleCore] = useCloseCore();
+  //console.log("from startMenu function" + coreStatus);
 
   const currentProjHandler = (index: number) => {
     setcurrentProj(index);
   };
+
+  const [{ status, isMounted }, toggle] = useTransition({
+    timeout: 500,
+    mountOnEnter: true,
+    unmountOnExit: true,
+    preEnter: true,
+  });
+
+  useEffect(() => {
+    toggle(coreStatus);
+    console.log("chnged toggle");
+    console.log(coreStatus);
+  }, [coreStatus]);
   return (
     <div
       style={{
-        zIndex:"100",
+        zIndex: "100",
         backdropFilter: "blur(70px)",
-        
       }}
-      className=" w-5/12 h-4/6 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 transition-height"
+      className={`w-5/12 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 transition-height 
+      }`}
     >
       <div className="w-2/5 float-left overflow-auto h-full">
         <div className="sticky top-0 bg-red-900  ">

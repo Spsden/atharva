@@ -1,7 +1,8 @@
-import React from "react";
+import React,{useRef} from "react";
 import dynamic from "next/dynamic";
-import { listOfFunctions, myMap } from "../../utils/processes/alltypes";
+import { listOfReactAppFunctions, myMap } from "../../utils/processes/alltypes";
 import { WinBoxControlInfo } from "react-winbox";
+import { CSSTransition } from "react-transition-group";
 
 const WinBox = dynamic(() => import("react-winbox"), { ssr: false });
 
@@ -30,8 +31,8 @@ const Window = ({
     class: "customMin",
     /** an image resource same like icon prop */
     image: "https://i.imgur.com/0HMFmZ7.png",
-    click: () => { 
-       console.log("Custom min tapped");
+    click: () => {
+      console.log("Custom min tapped");
     },
   };
 
@@ -61,7 +62,7 @@ const Window = ({
           closeCallBack();
         }}
       >
-        <ComponentA index={coreComponentId} />
+        <AtharvaApp index={coreComponentId} />
       </WinBox>
     );
 
@@ -70,7 +71,7 @@ const Window = ({
 
   if (type == "core") {
     // console.log("incore");
-    appToShow = <ComponentA index={coreComponentId} />;
+    appToShow = <AtharvaApp index={coreComponentId} />;
     return appToShow;
   } else {
     //console.log("inthird");
@@ -83,7 +84,7 @@ const Window = ({
         width="700"
         height={600}
         x="center"
-       // onMinimize={() => console.log("heyyeye")}
+        // onMinimize={() => console.log("heyyeye")}
         // noMin={true}
         noFull={true}
         customControls={[customMinimize]}
@@ -104,20 +105,24 @@ const Window = ({
 export default Window;
 
 function getFunction(index: number): (props: any) => JSX.Element {
-  return listOfFunctions[index];
+  return listOfReactAppFunctions[index];
 }
 
 interface Props {
   index: number;
 }
 
-const ComponentA: React.FC<Props> = ({ index }) => {
+const AtharvaApp: React.FC<Props> = ({ index }) => {
   //const index = 0;
-  const SelectedFunction = getFunction(index);
+  const AppToLaunch = getFunction(index);
+  //console.log(SelectedFunction);
+ const nodeRef = useRef(null)
 
   return (
     <div>
-      <SelectedFunction />
+     
+        <AppToLaunch />
+     
     </div>
   );
 };

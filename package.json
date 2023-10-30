@@ -6,13 +6,16 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "@reduxjs/toolkit": "^1.9.1",
+    "@types/react-transition-group": "^4.4.8",
     "eslint-config-next": "^13.1.5",
     "next": "^13.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-rnd": "^10.3.7",
+    "react-transition-state": "^2.1.1",
     "react-winbox": "^1.5.0",
     "uniqid": "^5.4.0"
   },

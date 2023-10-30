@@ -6,22 +6,15 @@ export const useCloseCore = () => {
   const [coreStatus, toggleCore] = useState<boolean>(false);
   const dispatch = useDispatch();
 
-  function handleCore(status:boolean) {
-    console.log("krlo print")
-     if (coreStatus) {
+  function handleCore(status: boolean) {
+    console.log("krlo print");
+    if (coreStatus) {
       dispatch(removeProcess("start_process"));
-      
     }
     toggleCore(status);
-   
   }
 
- // handleCore()
-
- 
+  // handleCore()
 
   return [coreStatus, handleCore] as const;
 };
-
-
-

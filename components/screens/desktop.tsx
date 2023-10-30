@@ -6,7 +6,7 @@ import BackgroundImage from "../utils/background";
 export default class Desktop extends Component {
   render() {
     return (
-      <div overflow-hidden>
+      <div  overflow-hidden="true">
         <BackgroundImage />
         <div className="text-white">
           <ContentArea  />

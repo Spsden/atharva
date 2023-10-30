@@ -14,7 +14,11 @@ export type InstalledApps = {
 
 export const myMap = new Map<string, Function>([["taskmanager", TaskManager]]);
 
-export const listOfFunctions: ((props: any) => JSX.Element)[] = [
+
+//These are coreApps which are not launched
+//from URL using any link. These are part of
+//of the app. located in the apps folder.
+export const listOfReactAppFunctions: ((props: any) => JSX.Element)[] = [
   StartMenu,
   TaskManager,
 ];

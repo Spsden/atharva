@@ -135,11 +135,7 @@ function Dock() {
             ) => (
               <li
                 className="inline"
-                // {
-                //   (existsInAllProcesses(item)
-                //     ? "bg-[#2563eb] w-10 m-1 rounded-lg p-0.5"
-                //     : "bg-transparent") + " inline "
-                // }
+                key={i}
               >
                 <button
                   onClick={(e) => {
@@ -148,7 +144,7 @@ function Dock() {
                         // console.log("open" + item.title)
                         handelLaunch(e, item);
                         handleCore(true);
-                        console.log(coreStatus);
+                      
                         //isAppOpen = !isAppOpen;
                       } else {
                         console.log("close" + item.title);
