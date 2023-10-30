@@ -1,8 +1,9 @@
-import React,{useRef} from "react";
+import React, { useRef } from "react";
 import dynamic from "next/dynamic";
 import { listOfReactAppFunctions, myMap } from "../../utils/processes/alltypes";
 import { WinBoxControlInfo } from "react-winbox";
-import { CSSTransition } from "react-transition-group";
+import { Transition } from "@headlessui/react";
+import { useCloseCore } from "../../../hooks/closeStartHook";
 
 const WinBox = dynamic(() => import("react-winbox"), { ssr: false });
 
@@ -115,14 +116,20 @@ interface Props {
 const AtharvaApp: React.FC<Props> = ({ index }) => {
   //const index = 0;
   const AppToLaunch = getFunction(index);
+  const [coreStatus, handleCore] = useCloseCore();
+
   //console.log(SelectedFunction);
- const nodeRef = useRef(null)
 
   return (
-    <div>
-     
+    // <div>
+    //   <AppToLaunch/>
+    // </div>
+  
+        
+       
+      <div>
         <AppToLaunch />
-     
-    </div>
+      </div>
+ 
   );
 };

@@ -128,45 +128,30 @@ function Dock() {
       </div>
       <div>
         <ul className="list-none">
-          {apps.map(
-            (
-              item: InstalledApps,
-              i: number
-            ) => (
-              <li
-                className="inline"
-                key={i}
-              >
-                <button
-                  onClick={(e) => {
-                    if (item.type == "core") {
-                      if (!coreStatus) {
-                        // console.log("open" + item.title)
-                        handelLaunch(e, item);
-                        handleCore(true);
-                      
-                        //isAppOpen = !isAppOpen;
-                      } else {
-                        console.log("close" + item.title);
-                        // closeHandler(item.id);
-                        handleCore(false);
-                        //isAppOpen = !isAppOpen;
-                      }
-                      console.log(coreStatus + "from dock");
+          {apps.map((item: InstalledApps, i: number) => (
+            <li className="inline" key={i}>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (item.type == "core") {
+                    if (!coreStatus) {
+                      handleCore(true, item);
                     } else {
-                      if (!existsInAllProcesses(item)) handelLaunch(e, item);
+                      handleCore(false, item);
                     }
-                  }}
-                  key={item.id}
-                  className={`w-11 m-1 hover:bg-slate-700 rounded-lg p-1 ${
-                    existsInAllProcesses(item) ? "bg-slate-700" : ""
-                  }`}
-                >
-                  <img src={item.icon} alt="icon" />
-                </button>
-              </li>
-            )
-          )}
+                  } else {
+                    if (!existsInAllProcesses(item)) handelLaunch(e, item);
+                  }
+                }}
+                key={item.id}
+                className={`w-11 m-1 hover:bg-slate-700 rounded-lg p-1 ${
+                  existsInAllProcesses(item) ? "bg-slate-700" : ""
+                }`}
+              >
+                <img src={item.icon} alt="icon" />
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
       <div className="hover:bg-slate-700 rounded-lg">

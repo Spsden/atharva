@@ -2,75 +2,80 @@ import React, { useEffect, useState } from "react";
 import StartProjectDescription from "./startProjectDes";
 import { useCloseCore } from "../../../hooks/closeStartHook";
 import { useTransition } from "react-transition-state";
+import { Transition } from "@headlessui/react";
 
 export const StartMenu = () => {
   const [currentProj, setcurrentProj] = useState<number>(0);
   const [coreStatus, handleCore] = useCloseCore();
-  //console.log("from startMenu function" + coreStatus);
+  console.log("from startMenu function" ,coreStatus);
 
   const currentProjHandler = (index: number) => {
     setcurrentProj(index);
   };
 
-  const [{ status, isMounted }, toggle] = useTransition({
-    timeout: 500,
-    mountOnEnter: true,
-    unmountOnExit: true,
-    preEnter: true,
-  });
 
-  useEffect(() => {
-    toggle(coreStatus);
-    console.log("chnged toggle");
-    console.log(coreStatus);
-  }, [coreStatus]);
   return (
-    <div
-      style={{
-        zIndex: "100",
-        backdropFilter: "blur(70px)",
-      }}
-      className={`w-5/12 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 transition-height 
-      }`}
+    <Transition
+    show={true}
+    enter="transition-opacity duration-75"
+    enterFrom="opacity-0"
+    enterTo="opacity-100"
+    leave="transition-opacity duration-150"
+    leaveFrom="opacity-100"
+    leaveTo="opacity-0"
+    
     >
-      <div className="w-2/5 float-left overflow-auto h-full">
-        <div className="sticky top-0 bg-red-900  ">
-          <h2>Projects</h2>
+      <div
+        style={{
+          zIndex: "100",
+          backdropFilter: "blur(70px)",
+        }}
+        className={`w-5/12 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 transition-height 
+      }`}
+      >
+        <div className="w-2/5 float-left overflow-auto h-full">
+          <div className="sticky top-0 bg-red-900  ">
+            <h2>Projects</h2>
+          </div>
+          <ul className="">
+            {allProjects.map(
+              (
+                item: {
+                  id: string;
+                  icon: string;
+                  githubUrl: string;
+                  title: string;
+                  description: string;
+                },
+                i: number
+              ) => (
+                <li
+                  key={i}
+                  className="m-3 hover:bg-sky-700"
+                  onClick={() => {
+                    currentProjHandler(i);
+                  }}
+                >
+                  <div className="flex space-x-2">
+                    <img
+                      className="h-10 rounded-lg"
+                      src={item.icon}
+                      alt="icon"
+                    />
+                    <p>{item.title}</p>
+                  </div>
+                </li>
+              )
+            )}
+          </ul>
         </div>
-        <ul className="">
-          {allProjects.map(
-            (
-              item: {
-                id: string;
-                icon: string;
-                githubUrl: string;
-                title: string;
-                description: string;
-              },
-              i: number
-            ) => (
-              <li
-                key={i}
-                className="m-3 hover:bg-sky-700"
-                onClick={() => {
-                  currentProjHandler(i);
-                }}
-              >
-                <div className="flex space-x-2">
-                  <img className="h-10 rounded-lg" src={item.icon} alt="icon" />
-                  <p>{item.title}</p>
-                </div>
-              </li>
-            )
-          )}
-        </ul>
-      </div>
 
-      <div className=" overflow-auto h-full  ">
-        <StartProjectDescription {...allProjects[currentProj]} />
-        {/* <div>{TechStackList[0].path}</div> */}
+        <div className=" overflow-auto h-full  ">
+          <StartProjectDescription {...allProjects[currentProj]} />
+          {/* <div>{TechStackList[0].path}</div> */}
+        </div>
       </div>
-    </div>
+    </Transition>
   );
 };
 
