@@ -12,8 +12,9 @@ export const StartMenu = () => {
       style={{
         zIndex:"100",
         backdropFilter: "blur(70px)",
+        
       }}
-      className="w-5/12 h-4/6 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50"
+      className=" w-5/12 h-4/6 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 transition-height"
     >
       <div className="w-2/5 float-left overflow-auto h-full">
         <div className="sticky top-0 bg-red-900  ">
