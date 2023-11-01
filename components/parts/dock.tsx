@@ -105,7 +105,7 @@ function Dock() {
 
   const existsInAllProcesses = (app: InstalledApps) => {
     for (let index = 0; index < allProcesses.length; index++) {
-      if (allProcesses[index].id == app.id) {
+      if (allProcesses[index]?.id == app.id) {
         return true;
       }
     }

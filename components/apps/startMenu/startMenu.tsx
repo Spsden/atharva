@@ -12,15 +12,18 @@ export const StartMenu = () => {
   const currentProjHandler = (index: number) => {
     setcurrentProj(index);
   };
+  console.log()
+  
 
 
   return (
     <Transition
-    show={true}
-    enter="transition-opacity duration-75"
+     appear={true}
+    show={!coreStatus}
+    enter="transition-opacity duration-750"
     enterFrom="opacity-0"
     enterTo="opacity-100"
-    leave="transition-opacity duration-150"
+    leave="transition-opacity duration-1500"
     leaveFrom="opacity-100"
     leaveTo="opacity-0"
     
@@ -30,7 +33,7 @@ export const StartMenu = () => {
           zIndex: "100",
           backdropFilter: "blur(70px)",
         }}
-        className={`w-5/12 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 transition-height 
+        className={`w-5/12 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 
       }`}
       >
         <div className="w-2/5 float-left overflow-auto h-full">
