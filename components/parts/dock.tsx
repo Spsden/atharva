@@ -14,14 +14,14 @@ const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 //const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 let apps: InstalledApps[] = [
-  {
-    id: "start_process",
-    icon: "https://i.imgur.com/20NiE9m.png",
-    title: "start",
-    type: "core",
-    coreComponentId: 0,
-    appPageUrl: "http://www.google.com/",
-  },
+  // {
+  //   id: "start_process",
+  //   icon: "https://i.imgur.com/20NiE9m.png",
+  //   title: "start",
+  //   type: "core",
+  //   coreComponentId: 0,
+  //   appPageUrl: "http://www.google.com/",
+  // },
   {
     id: "explorer_process",
     icon: "https://i.imgur.com/Whdx3HA.png",
@@ -64,7 +64,16 @@ let apps: InstalledApps[] = [
   },
 ];
 
-let right: { id: number; icon: string; name: string }[] = [
+const start: InstalledApps = {
+  id: "start_process",
+  icon: "https://i.imgur.com/20NiE9m.png",
+  title: "start",
+  type: "core",
+  coreComponentId: 0,
+  appPageUrl: "http://www.google.com/",
+};
+
+const right: { id: number; icon: string; name: string }[] = [
   {
     id: 1,
     icon: "https://i.imgur.com/7TX5Py4.png",
@@ -77,7 +86,11 @@ let right: { id: number; icon: string; name: string }[] = [
   },
 ];
 
-function Dock() {
+type DockProps = {
+  starStateCallBack:Function
+}
+
+function Dock({starStateCallBack}:DockProps) {
   const allProcesses = useTypedSelector(selectProcess);
   const dispatch = useDispatch();
   const handelLaunch = (e: any, item: any) => {
@@ -102,7 +115,6 @@ function Dock() {
   let isAppOpen = false;
 
   const [coreStatus, handleCore] = useCloseCore();
-
   const existsInAllProcesses = (app: InstalledApps) => {
     for (let index = 0; index < allProcesses.length; index++) {
       if (allProcesses[index]?.id == app.id) {
@@ -124,7 +136,17 @@ function Dock() {
       className="flex justify-between fixed bottom-0  items-center  mb-1  bg-stone-800/50  rounded-lg   drop-shadow-2xl h-13 p-0.5"
     >
       <div className="text-white align-center">
-        <p>🌤️Cloudy 22 ℃</p>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            starStateCallBack();
+          }}
+          className={`w-11 m-1 hover:bg-slate-700 rounded-lg p-1`}
+        >
+          <img src={start.icon} alt="icon" />
+        </button>
+
+        {/* <p>🌤️Cloudy 22 ℃</p> */}
       </div>
       <div>
         <ul className="list-none">
@@ -133,12 +155,15 @@ function Dock() {
               <button
                 onClick={(e) => {
                   e.preventDefault();
+
                   if (item.type == "core") {
-                    if (!coreStatus) {
-                      handleCore(true, item);
-                    } else {
-                      handleCore(false, item);
-                    }
+                    handleCore(!coreStatus, item);
+
+                    // if (!coreStatus) {
+                    //   handleCore(true, item);
+                    // } else {
+                    //   handleCore(false, item);
+                    // }
                   } else {
                     if (!existsInAllProcesses(item)) handelLaunch(e, item);
                   }

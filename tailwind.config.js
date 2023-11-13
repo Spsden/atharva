@@ -1,22 +1,28 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './app/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
       keyframes: {
-        slideIn: {
-          "0%": { opacity: 0, transform: "translateY(100%)" },
-          "100%": { opacity: 1, transform: "translateY(0)" }
-        }
+        "moving-line": {
+          from: {
+            width: "0px",
+            opacity: "0",
+          },
+          to: {
+            width: "30%",
+            opacity: "1",
+          },
+        },
       },
       animation: {
-        slideIn: "slideIn .25s ease-in-out forwards var(--delay, 0)"
-      }
+        "moving-line": "moving-line .8s ease .5s forwards",
+      },
     },
   },
   plugins: [],
-}
+};

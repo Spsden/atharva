@@ -127,7 +127,7 @@ const AtharvaApp: React.FC<Props> = ({ index }) => {
   
         
        
-      <div>
+      <div className="h-12 to-blue-300">
         <AppToLaunch />
       </div>
  

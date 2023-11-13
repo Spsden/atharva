@@ -3,39 +3,41 @@ import StartProjectDescription from "./startProjectDes";
 import { useCloseCore } from "../../../hooks/closeStartHook";
 import { useTransition } from "react-transition-state";
 import { Transition } from "@headlessui/react";
+import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
+import { RootState, selectProcess } from "../../utils/processes/store";
+import { InstalledApps } from "../../utils/processes/alltypes";
+
+const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const StartMenu = () => {
-  const [currentProj, setcurrentProj] = useState<number>(0);
-  const [coreStatus, handleCore] = useCloseCore();
-  console.log("from startMenu function" ,coreStatus);
+  const [currentProj, setcurrentProj] = useState<number>(0)
+  
+  // const [coreStatus, handleCore] = useCloseCore();
 
+ 
   const currentProjHandler = (index: number) => {
     setcurrentProj(index);
   };
-  console.log()
+
+
+
+  
+ 
+
   
 
 
   return (
-    <Transition
-     appear={true}
-    show={!coreStatus}
-    enter="transition-opacity duration-750"
-    enterFrom="opacity-0"
-    enterTo="opacity-100"
-    leave="transition-opacity duration-1500"
-    leaveFrom="opacity-100"
-    leaveTo="opacity-0"
-    
-    >
+  
       <div
         style={{
           zIndex: "100",
           backdropFilter: "blur(70px)",
         }}
-        className={`w-5/12 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 
+        className={`w-5/12 h-4/6 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 
       }`}
       >
+  
         <div className="w-2/5 float-left overflow-auto h-full">
           <div className="sticky top-0 bg-red-900  ">
             <h2>Projects</h2>
@@ -78,7 +80,7 @@ export const StartMenu = () => {
           {/* <div>{TechStackList[0].path}</div> */}
         </div>
       </div>
-    </Transition>
+  
   );
 };
 
