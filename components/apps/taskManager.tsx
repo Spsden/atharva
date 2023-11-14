@@ -1,11 +1,12 @@
 import React from "react";
-import { RootState, selectProcess } from "../utils/processes/store";
+// import { RootState, selectProcess } from "../utils/processes/store";
 import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
+import { RootStates } from "../utils/reducers";
 
-const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+// const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 function TaskManager() {
-  const allProcesses = useTypedSelector(selectProcess);
+  const allProcesses = useSelector((state: RootStates) => state.processes.list);
   return (
     <div>
       <ul>

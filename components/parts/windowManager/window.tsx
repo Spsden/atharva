@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { listOfReactAppFunctions } from "../../utils/processes/alltypes";
 import { WinBoxControlInfo } from "react-winbox";
 import { useCloseCore } from "../../../hooks/closeStartHook";
+import { windowStates } from "../../utils/reducers/process_state";
 
 const WinBox = dynamic(() => import("react-winbox"), { ssr: false });
 
@@ -15,6 +16,7 @@ const Window = ({
   type,
   closeCallBack,
   minMaxCallBack,
+  currentState,
 }: windowProps) => {
   const [hidden, setHidden] = useState(false);
   const customMinimize: WinBoxControlInfo = {
@@ -65,6 +67,7 @@ const Window = ({
 
     appToShow = (
       <WinBox
+      hide={currentState === windowStates.MINIMIZED}
         id={id}
         key={id}
         title={title}
@@ -129,4 +132,5 @@ type windowProps = {
   type: string;
   closeCallBack: Function;
   minMaxCallBack:Function;
+  currentState:windowStates
 };

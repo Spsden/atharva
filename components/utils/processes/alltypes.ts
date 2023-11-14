@@ -3,15 +3,8 @@ import { StartMenu } from "../../apps/startMenu/startMenu";
 import TaskManager from "../../apps/taskManager";
 import React, { ReactNode } from "react";
 
-export enum windowStates {
-  MINIMIZED,
-  MAXIMIZED,
-  OPEN,
-}
 
-export interface InstalledAppsWithState extends InstalledApps {
-  currentState: windowStates;
-}
+
 
 export type InstalledApps = {
   id: string;

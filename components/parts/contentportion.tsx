@@ -12,6 +12,7 @@ import { StartMenu } from "../apps/startMenu/startMenu";
 import { Transition } from "@headlessui/react";
 import store, { RootState, RootStates } from "../utils/reducers";
 import { removeProcess } from "../utils/reducers/processes";
+import { windowStates } from "../utils/reducers/process_state";
 
 type contentAreaProps = {
   startState: boolean;
@@ -19,13 +20,14 @@ type contentAreaProps = {
 function ContentArea({ startState }: contentAreaProps) {
   const processes = useSelector((state: RootStates) => state.processes.list);
   const processState = useSelector(
-    (state: RootStates) => state.windowStates.list
+    (state: RootStates) => state.windowStates
   );
   console.log(processState);
 
   // const processes = useSelector((state:any) => {
   //   return state.processes;
   // })
+  
   const dispatch = useDispatch();
 
   function closeHandler(id: string) {
@@ -38,9 +40,15 @@ function ContentArea({ startState }: contentAreaProps) {
     console.log(id);
   }
 
-  const isMinimized = (id:string) => {
-     
-  }
+  const isMinimized = (processID: string):windowStates => {
+    console.log(processID)
+    const windowState = processState.list.find((state) => state.processID === processID);
+    console.log(windowState)
+    return windowState?.currentState
+
+    //console.log(windowState?.currentState === windowStates.MAXIMIZED)
+    //return windowState ? windowState.currentState === windowStates.MINIMIZED : false;
+  };
 
   // function hideHandler(id:string) {
 
@@ -66,6 +74,11 @@ function ContentArea({ startState }: contentAreaProps) {
         <ul>
           {processes.map((item, i) => (
             <li key={i}>
+              <button onClick={(e)=>{
+                e.preventDefault()
+                isMinimized(item.id)
+
+              }}>test</button>
               <Window
                 key={item.id}
                 appPageUrl={item.appPageUrl}
@@ -80,6 +93,7 @@ function ContentArea({ startState }: contentAreaProps) {
                 minMaxCallBack={() => {
                   minMaxHandler(item.id);
                 }}
+                currentState={isMinimized(item.id)}
               />
             </li>
           ))}

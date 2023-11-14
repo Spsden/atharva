@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import {  useDispatch, useSelector } from "react-redux";
 // import {
 //   addProcess,
 //   removeProcess,
@@ -9,14 +9,12 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 // } from "../utils/processes/store";
 import {
   InstalledApps,
-  InstalledAppsWithState,
-  windowStates,
 } from "../utils/processes/alltypes";
 
 import { useCloseCore } from "../../hooks/closeStartHook";
 import { RootStates } from "../utils/reducers";
 import { addProcess, removeProcess } from "../utils/reducers/processes";
-const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+import { setMinimize, windowState, windowStates } from "../utils/reducers/process_state";
 
 //const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 let apps: InstalledApps[] = [
@@ -101,15 +99,14 @@ type DockProps = {
 function Dock({ starStateCallBack }: DockProps) {
   const processes = useSelector((state: RootStates) => state.processes.list);
   const dispatch = useDispatch();
-  const handelLaunch = (e: any, item: InstalledApps,currentState:windowStates) => {
-    const process: InstalledAppsWithState = {
+  const handelLaunch = (e: any, item: InstalledApps) => {
+    const process: InstalledApps = {
       appPageUrl: item.appPageUrl,
       icon: item.icon,
       id: item.id,
       type: item.type,
       coreComponentId: item.coreComponentId,
       title: item.title,
-      currentState: currentState,
     };
     e.preventDefault();
     console.log("tapped");
@@ -121,7 +118,15 @@ function Dock({ starStateCallBack }: DockProps) {
 
     dispatch(removeProcess(id));
   }
-  let isAppOpen = false;
+
+  const setLaunchState = (processID:string,launchState :windowStates) => {
+    const state:windowState = {
+      currentState:launchState,
+      processID:processID
+
+    }
+    dispatch(setMinimize(state))
+  }
 
   const [coreStatus, handleCore] = useCloseCore();
   const existsInAllProcesses = (app: InstalledApps) => {
@@ -175,8 +180,14 @@ function Dock({ starStateCallBack }: DockProps) {
                     // }
                   } else {
                     if (!existsInAllProcesses(item)) {
-                      handelLaunch(e, item,windowStates.OPEN);
-                    } 
+                      handelLaunch(e, item);
+                      setLaunchState(item.id,windowStates.MAXIMIZED)
+                    }  else{
+                      
+                      setLaunchState(item.id,windowStates.MINIMIZED)
+
+                      
+                    }
                     // else{
                     //   handelLaunch(e, item,windowStates.MINIMIZED);
 
@@ -209,6 +220,6 @@ function Dock({ starStateCallBack }: DockProps) {
 }
 
 export default Dock;
-function useRef(arg0: null): React.RefObject<any> | undefined {
-  throw new Error("Function not implemented.");
-}
+// function useRef(arg0: null): React.RefObject<any> | undefined {
+//   throw new Error("Function not implemented.");
+// }
