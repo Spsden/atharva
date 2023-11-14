@@ -6,7 +6,7 @@ import { StartMenu } from "../apps/startMenu/startMenu";
 import { Transition } from "@headlessui/react";
 import {  RootStates } from "../utils/reducers";
 import { removeProcess } from "../utils/reducers/processes";
-import { setMinimize } from "../utils/reducers/process_state";
+import { removeFromProcessStates, setMinimize } from "../utils/reducers/process_state";
 
 type contentAreaProps = {
   startState: boolean;
@@ -23,6 +23,7 @@ function ContentArea({ startState,startToggle }: contentAreaProps) {
     console.log(id);
 
     dispatch(removeProcess(id));
+    dispatch(removeFromProcessStates({processID:id}))
   }
 
   function minMaxHandler(processID: string) {

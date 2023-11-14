@@ -37,28 +37,25 @@ export const windowStatesSlice = createSlice({
         state.list.push({ isMinimized: false, processID });
       }
     },
-    // setMaximize(
-    //   state: WindowStatesList,
-    //   action: PayloadAction<{ processID: string }>
-    // ) {
-    //   const { processID } = action.payload;
+    removeFromProcessStates(
+      state: WindowStatesList,
+      action: PayloadAction<{ processID: string }>
+    ) {
+      const { processID } = action.payload;
 
-    //   const existingWindow = state.list.find(
-    //     (window) => window.processID === processID
-    //   );
+      const indexOfProcess = state.list.findIndex(
+        (window) => window.processID === processID
+      );
+      
 
-    //   if (existingWindow) {
-    //     state.list = state.list.map((window) =>
-    //       window.processID === processID
-    //         ? { ...window, isMinimized: false }
-    //         : window
-    //     );
-    //   } else {
-    //     state.list.push({ isMinimized: false, processID });
-    //   }
-    // },
+      if(indexOfProcess !== -1){
+        state.list.splice(indexOfProcess, 1);
+      }
+
+     
+    },
   },
 });
 
-export const { setMinimize } = windowStatesSlice.actions;
+export const { setMinimize,removeFromProcessStates } = windowStatesSlice.actions;
 export const windowStateReducers = windowStatesSlice.reducer;
