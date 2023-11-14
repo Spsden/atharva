@@ -6,34 +6,31 @@ export enum windowStates {
   OPEN,
 }
 
-export type windowState = {
-  currentState: windowState;
-  processID: string;
-};
+// export type windowState = {
 
-type windowStatesList = {
-  list: windowState[];
-};
+//   currentState: windowState;
+//   processID: string;
+// };
 
-const processState: windowStatesList = {
-  list: [],
-};
+export type windowStateMapType = Map<string, windowStates>;
+
+const processState: windowStateMapType = new Map();
 
 export const windowStatesSlice = createSlice({
   name: "windowState",
   initialState: processState,
   reducers: {
-    setMinimize(state: windowStatesList, action: PayloadAction<windowState>) {
-      console.log("maximized");
+    setMinimize(state: windowStateMapType, action: PayloadAction<string>) {
+      state.set(action.payload, windowStates.MINIMIZED);
+      console.log("minimized");
     },
-    setMaximize(state: windowStatesList, action: PayloadAction<windowState>) {
-      console.log("minized");
+    setMaximize(state: windowStateMapType, action: PayloadAction<string>) {
+      state.set(action.payload, windowStates.MAXIMIZED);
+
+      console.log("maximized");
     },
   },
 });
 
-export  const {setMinimize,setMaximize} = windowStatesSlice.actions;
-export const windowStateReducers = windowStatesSlice.reducer
-
-
-
+export const { setMinimize, setMaximize } = windowStatesSlice.actions;
+export const windowStateReducers = windowStatesSlice.reducer;

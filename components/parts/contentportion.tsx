@@ -13,12 +13,15 @@ import { Transition } from "@headlessui/react";
 import store, { RootState, RootStates } from "../utils/reducers";
 import { removeProcess } from "../utils/reducers/processes";
 
-const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 type contentAreaProps = {
   startState: boolean;
 };
 function ContentArea({ startState }: contentAreaProps) {
   const processes = useSelector((state: RootStates) => state.processes.list);
+  const processState = useSelector(
+    (state: RootStates) => state.windowStates.list
+  );
+  console.log(processState);
 
   // const processes = useSelector((state:any) => {
   //   return state.processes;
@@ -29,6 +32,14 @@ function ContentArea({ startState }: contentAreaProps) {
     console.log(id);
 
     dispatch(removeProcess(id));
+  }
+
+  function minMaxHandler(id: string) {
+    console.log(id);
+  }
+
+  const isMinimized = (id:string) => {
+     
   }
 
   // function hideHandler(id:string) {
@@ -63,10 +74,11 @@ function ContentArea({ startState }: contentAreaProps) {
                 icon={item.icon}
                 coreComponentId={item.coreComponentId}
                 type={item.type}
-                
-              
                 closeCallBack={() => {
                   closeHandler(item.id);
+                }}
+                minMaxCallBack={() => {
+                  minMaxHandler(item.id);
                 }}
               />
             </li>

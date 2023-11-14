@@ -1,3 +1,7 @@
+///DEPRECATED///
+
+
+
 // import { configureStore, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // import { InstalledApps } from "./alltypes";

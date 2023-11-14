@@ -1,12 +1,7 @@
 import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import {
-  listOfReactAppFunctions,
-  myMap,
-  windowStates,
-} from "../../utils/processes/alltypes";
+import { listOfReactAppFunctions } from "../../utils/processes/alltypes";
 import { WinBoxControlInfo } from "react-winbox";
-import { Transition } from "@headlessui/react";
 import { useCloseCore } from "../../../hooks/closeStartHook";
 
 const WinBox = dynamic(() => import("react-winbox"), { ssr: false });
@@ -19,15 +14,8 @@ const Window = ({
   coreComponentId,
   type,
   closeCallBack,
-}: {
-  appPageUrl: string;
-  title: string;
-  id: string;
-  icon: string;
-  coreComponentId: number;
-  type: string;
-  closeCallBack: Function;
-}) => {
+  minMaxCallBack,
+}: windowProps) => {
   const [hidden, setHidden] = useState(false);
   const customMinimize: WinBoxControlInfo = {
     index: 420,
@@ -130,4 +118,15 @@ const AtharvaApp: React.FC<Props> = ({ index }) => {
       <AppToLaunch />
     </div>
   );
+};
+
+type windowProps = {
+  appPageUrl: string;
+  title: string;
+  id: string;
+  icon: string;
+  coreComponentId: number;
+  type: string;
+  closeCallBack: Function;
+  minMaxCallBack:Function;
 };
