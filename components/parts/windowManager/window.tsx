@@ -67,7 +67,7 @@ const Window = ({
 
     appToShow = (
       <WinBox
-      hide={currentState === windowStates.MINIMIZED}
+      hide={currentState}
         id={id}
         key={id}
         title={title}
@@ -132,5 +132,5 @@ type windowProps = {
   type: string;
   closeCallBack: Function;
   minMaxCallBack:Function;
-  currentState:windowStates
+  currentState:boolean
 };

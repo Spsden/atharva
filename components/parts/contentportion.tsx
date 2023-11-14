@@ -40,19 +40,12 @@ function ContentArea({ startState }: contentAreaProps) {
     console.log(id);
   }
 
-  const isMinimized = (processID: string):windowStates => {
-    console.log(processID)
+  const isAppMinimized = (processID: string): boolean => {
     const windowState = processState.list.find((state) => state.processID === processID);
-    console.log(windowState)
-    return windowState?.currentState
-
-    //console.log(windowState?.currentState === windowStates.MAXIMIZED)
-    //return windowState ? windowState.currentState === windowStates.MINIMIZED : false;
+    return windowState?.isMinimized ?? false;
   };
+  
 
-  // function hideHandler(id:string) {
-
-  // }
 
   return (
     <div>
@@ -93,7 +86,7 @@ function ContentArea({ startState }: contentAreaProps) {
                 minMaxCallBack={() => {
                   minMaxHandler(item.id);
                 }}
-                currentState={isMinimized(item.id)}
+                currentState={isAppMinimized(item.id)}
               />
             </li>
           ))}

@@ -119,13 +119,13 @@ function Dock({ starStateCallBack }: DockProps) {
     dispatch(removeProcess(id));
   }
 
-  const setLaunchState = (processID:string,launchState :windowStates) => {
-    const state:windowState = {
-      currentState:launchState,
-      processID:processID
+  const setLaunchState = (processID:string,) => {
+    // const state:windowState = {
+    //   currentState:launchState,
+    //   processID:processID
 
-    }
-    dispatch(setMinimize(state))
+    // }
+    dispatch(setMinimize({processID:processID}))
   }
 
   const [coreStatus, handleCore] = useCloseCore();
@@ -181,10 +181,10 @@ function Dock({ starStateCallBack }: DockProps) {
                   } else {
                     if (!existsInAllProcesses(item)) {
                       handelLaunch(e, item);
-                      setLaunchState(item.id,windowStates.MAXIMIZED)
+                      setLaunchState(item.id)
                     }  else{
-                      
-                      setLaunchState(item.id,windowStates.MINIMIZED)
+
+                      setLaunchState(item.id)
 
                       
                     }
