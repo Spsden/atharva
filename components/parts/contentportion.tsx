@@ -1,33 +1,21 @@
 import React from "react";
-import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
-
-// import {
-//   removeProcess,
-//   RootState,
-//   selectProcess,
-// } from "../utils/processes/store";
+import { useSelector, useDispatch } from "react-redux";
 
 import Window from "./windowManager/window";
 import { StartMenu } from "../apps/startMenu/startMenu";
 import { Transition } from "@headlessui/react";
 import store, { RootState, RootStates } from "../utils/reducers";
 import { removeProcess } from "../utils/reducers/processes";
-import { windowStates } from "../utils/reducers/process_state";
+import { setMinimize } from "../utils/reducers/process_state";
 
 type contentAreaProps = {
   startState: boolean;
 };
 function ContentArea({ startState }: contentAreaProps) {
   const processes = useSelector((state: RootStates) => state.processes.list);
-  const processState = useSelector(
-    (state: RootStates) => state.windowStates
-  );
+  const processState = useSelector((state: RootStates) => state.windowStates);
   console.log(processState);
 
-  // const processes = useSelector((state:any) => {
-  //   return state.processes;
-  // })
-  
   const dispatch = useDispatch();
 
   function closeHandler(id: string) {
@@ -36,16 +24,16 @@ function ContentArea({ startState }: contentAreaProps) {
     dispatch(removeProcess(id));
   }
 
-  function minMaxHandler(id: string) {
-    console.log(id);
+  function minMaxHandler(processID: string) {
+    dispatch(setMinimize({ processID: processID }));
   }
 
   const isAppMinimized = (processID: string): boolean => {
-    const windowState = processState.list.find((state) => state.processID === processID);
+    const windowState = processState.list.find(
+      (state) => state.processID === processID
+    );
     return windowState?.isMinimized ?? false;
   };
-  
-
 
   return (
     <div>
@@ -67,11 +55,6 @@ function ContentArea({ startState }: contentAreaProps) {
         <ul>
           {processes.map((item, i) => (
             <li key={i}>
-              <button onClick={(e)=>{
-                e.preventDefault()
-                isMinimized(item.id)
-
-              }}>test</button>
               <Window
                 key={item.id}
                 appPageUrl={item.appPageUrl}

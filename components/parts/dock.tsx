@@ -120,11 +120,7 @@ function Dock({ starStateCallBack }: DockProps) {
   }
 
   const setLaunchState = (processID:string,) => {
-    // const state:windowState = {
-    //   currentState:launchState,
-    //   processID:processID
-
-    // }
+    
     dispatch(setMinimize({processID:processID}))
   }
 

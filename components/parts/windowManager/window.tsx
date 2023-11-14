@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import { listOfReactAppFunctions } from "../../utils/processes/alltypes";
 import { WinBoxControlInfo } from "react-winbox";
 import { useCloseCore } from "../../../hooks/closeStartHook";
-import { windowStates } from "../../utils/reducers/process_state";
 
 const WinBox = dynamic(() => import("react-winbox"), { ssr: false });
 
@@ -18,14 +17,13 @@ const Window = ({
   minMaxCallBack,
   currentState,
 }: windowProps) => {
-  const [hidden, setHidden] = useState(false);
   const customMinimize: WinBoxControlInfo = {
     index: 420,
     class: "customMin",
     image: "https://i.imgur.com/0HMFmZ7.png",
     click: () => {
       console.log("Custom min tapped");
-      setHidden(!hidden);
+      minMaxCallBack()
     },
   };
 
@@ -44,9 +42,7 @@ const Window = ({
         //noMin={true}
         noFull={true}
         customControls={[customMinimize]}
-        // onMinimize= {() => {
-        //   console.log("miniize tapped")
-        // }}
+     
         onClose={() => {
           closeCallBack();
         }}
@@ -108,9 +104,7 @@ interface Props {
 const AtharvaApp: React.FC<Props> = ({ index }) => {
   //const index = 0;
   const AppToLaunch = getFunction(index);
-  const [coreStatus, handleCore] = useCloseCore();
 
-  //console.log(SelectedFunction);
 
   return (
     // <div>
