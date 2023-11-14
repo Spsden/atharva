@@ -3,17 +3,27 @@ import { StartMenu } from "../../apps/startMenu/startMenu";
 import TaskManager from "../../apps/taskManager";
 import React, { ReactNode } from "react";
 
+export enum windowStates {
+  MINIMIZED,
+  MAXIMIZED,
+  OPEN,
+}
+
+export interface InstalledAppsWithState extends InstalledApps {
+  currentState: windowStates;
+}
+
 export type InstalledApps = {
   id: string;
   appPageUrl: string;
   title: string;
   type: string;
   icon: string;
+  ref?: React.RefObject<any>;
   coreComponentId: number;
 };
 
 export const myMap = new Map<string, Function>([["taskmanager", TaskManager]]);
-
 
 //These are coreApps which are not launched
 //from URL using any link. These are part of
@@ -29,6 +39,6 @@ export interface IconData {
 }
 
 export interface contextMenuItems {
-  title:string;
-  id:number;
+  title: string;
+  id: number;
 }

@@ -1,29 +1,39 @@
 import React from "react";
 import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
 
-import {
-  removeProcess,
-  RootState,
-  selectProcess,
-} from "../utils/processes/store";
+// import {
+//   removeProcess,
+//   RootState,
+//   selectProcess,
+// } from "../utils/processes/store";
+
 import Window from "./windowManager/window";
 import { StartMenu } from "../apps/startMenu/startMenu";
 import { Transition } from "@headlessui/react";
+import store, { RootState, RootStates } from "../utils/reducers";
+import { removeProcess } from "../utils/reducers/processes";
 
 const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 type contentAreaProps = {
-  startState: boolean
-}
-function ContentArea({startState}:contentAreaProps) {
-  const processes = useTypedSelector(selectProcess);
-  const dispatch = useDispatch();
+  startState: boolean;
+};
+function ContentArea({ startState }: contentAreaProps) {
+  const processes = useSelector((state: RootStates) => state.processes.list);
 
+  // const processes = useSelector((state:any) => {
+  //   return state.processes;
+  // })
+  const dispatch = useDispatch();
 
   function closeHandler(id: string) {
     console.log(id);
 
     dispatch(removeProcess(id));
   }
+
+  // function hideHandler(id:string) {
+
+  // }
 
   return (
     <div>
@@ -38,7 +48,7 @@ function ContentArea({startState}:contentAreaProps) {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-      <StartMenu/>
+        <StartMenu />
       </Transition>
 
       <div>
@@ -53,6 +63,8 @@ function ContentArea({startState}:contentAreaProps) {
                 icon={item.icon}
                 coreComponentId={item.coreComponentId}
                 type={item.type}
+                
+              
                 closeCallBack={() => {
                   closeHandler(item.id);
                 }}

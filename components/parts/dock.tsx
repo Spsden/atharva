@@ -1,15 +1,21 @@
 import React from "react";
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+// import {
+//   addProcess,
+//   removeProcess,
+//   RootState,
+//   selectProcess,
+// } from "../utils/processes/store";
 import {
-  addProcess,
-  removeProcess,
-  RootState,
-  selectProcess,
-} from "../utils/processes/store";
-import { InstalledApps } from "../utils/processes/alltypes";
+  InstalledApps,
+  InstalledAppsWithState,
+  windowStates,
+} from "../utils/processes/alltypes";
 
 import { useCloseCore } from "../../hooks/closeStartHook";
+import { RootStates } from "../utils/reducers";
+import { addProcess, removeProcess } from "../utils/reducers/processes";
 const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 //const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
@@ -28,6 +34,7 @@ let apps: InstalledApps[] = [
     title: "Explorer",
     type: "thirdParty",
     coreComponentId: -1,
+
     appPageUrl: "https://www.jiosaavn.com/",
   },
   {
@@ -44,6 +51,7 @@ let apps: InstalledApps[] = [
     title: "Calculator",
     type: "thirdParty",
     coreComponentId: -1,
+
     appPageUrl: "https://www.calculator.com/",
   },
   {
@@ -87,24 +95,25 @@ const right: { id: number; icon: string; name: string }[] = [
 ];
 
 type DockProps = {
-  starStateCallBack:Function
-}
+  starStateCallBack: Function;
+};
 
-function Dock({starStateCallBack}:DockProps) {
-  const allProcesses = useTypedSelector(selectProcess);
+function Dock({ starStateCallBack }: DockProps) {
+  const processes = useSelector((state: RootStates) => state.processes.list);
   const dispatch = useDispatch();
-  const handelLaunch = (e: any, item: any) => {
-    const duck: InstalledApps = {
+  const handelLaunch = (e: any, item: InstalledApps,currentState:windowStates) => {
+    const process: InstalledAppsWithState = {
       appPageUrl: item.appPageUrl,
       icon: item.icon,
       id: item.id,
       type: item.type,
       coreComponentId: item.coreComponentId,
       title: item.title,
+      currentState: currentState,
     };
     e.preventDefault();
     console.log("tapped");
-    dispatch(addProcess(duck));
+    dispatch(addProcess(process));
   };
 
   function closeHandler(id: string) {
@@ -116,8 +125,8 @@ function Dock({starStateCallBack}:DockProps) {
 
   const [coreStatus, handleCore] = useCloseCore();
   const existsInAllProcesses = (app: InstalledApps) => {
-    for (let index = 0; index < allProcesses.length; index++) {
-      if (allProcesses[index]?.id == app.id) {
+    for (let index = 0; index < processes.length; index++) {
+      if (processes[index]?.id == app.id) {
         return true;
       }
     }
@@ -165,7 +174,14 @@ function Dock({starStateCallBack}:DockProps) {
                     //   handleCore(false, item);
                     // }
                   } else {
-                    if (!existsInAllProcesses(item)) handelLaunch(e, item);
+                    if (!existsInAllProcesses(item)) {
+                      handelLaunch(e, item,windowStates.OPEN);
+                    } 
+                    // else{
+                    //   handelLaunch(e, item,windowStates.MINIMIZED);
+
+
+                    // }
                   }
                 }}
                 key={item.id}
@@ -193,3 +209,6 @@ function Dock({starStateCallBack}:DockProps) {
 }
 
 export default Dock;
+function useRef(arg0: null): React.RefObject<any> | undefined {
+  throw new Error("Function not implemented.");
+}

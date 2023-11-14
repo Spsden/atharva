@@ -1,6 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { listOfReactAppFunctions, myMap } from "../../utils/processes/alltypes";
+import {
+  listOfReactAppFunctions,
+  myMap,
+  windowStates,
+} from "../../utils/processes/alltypes";
 import { WinBoxControlInfo } from "react-winbox";
 import { Transition } from "@headlessui/react";
 import { useCloseCore } from "../../../hooks/closeStartHook";
@@ -24,25 +28,19 @@ const Window = ({
   type: string;
   closeCallBack: Function;
 }) => {
-  //function closeHandler() {}
-
+  const [hidden, setHidden] = useState(false);
   const customMinimize: WinBoxControlInfo = {
     index: 420,
-    /** a name to identify the button, can also style it by using css, may starts with `wb-` */
     class: "customMin",
-    /** an image resource same like icon prop */
     image: "https://i.imgur.com/0HMFmZ7.png",
     click: () => {
       console.log("Custom min tapped");
+      setHidden(!hidden);
     },
   };
 
-  console.log(type);
-
   var appToShow;
   if (type == "coreApp") {
-    // console.log("incoreApp");
-
     appToShow = (
       <WinBox
         key={id}
@@ -86,12 +84,15 @@ const Window = ({
         height={600}
         x="center"
         // onMinimize={() => console.log("heyyeye")}
-        // noMin={true}
+        noMin={true}
         noFull={true}
         customControls={[customMinimize]}
         y={30}
         url={appPageUrl}
         icon={icon}
+        onMinimize={() => {
+          console.log();
+        }}
         onClose={() => {
           closeCallBack();
         }}
@@ -124,12 +125,9 @@ const AtharvaApp: React.FC<Props> = ({ index }) => {
     // <div>
     //   <AppToLaunch/>
     // </div>
-  
-        
-       
-      <div className="h-12 to-blue-300">
-        <AppToLaunch />
-      </div>
- 
+
+    <div className="h-12 to-blue-300">
+      <AppToLaunch />
+    </div>
   );
 };
