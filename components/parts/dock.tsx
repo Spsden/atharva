@@ -1,20 +1,14 @@
 import React from "react";
 
-import {  useDispatch, useSelector } from "react-redux";
-// import {
-//   addProcess,
-//   removeProcess,
-//   RootState,
-//   selectProcess,
-// } from "../utils/processes/store";
-import {
-  InstalledApps,
-} from "../utils/processes/alltypes";
+import { useDispatch, useSelector } from "react-redux";
+
+import { InstalledApps } from "../utils/processes/alltypes";
 
 import { useCloseCore } from "../../hooks/closeStartHook";
 import { RootStates } from "../utils/reducers";
 import { addProcess, removeProcess } from "../utils/reducers/processes";
-import { setMinimize, windowState, windowStates } from "../utils/reducers/process_state";
+import { setMinimize } from "../utils/reducers/process_state";
+import Image from 'next/image'
 
 //const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 let apps: InstalledApps[] = [
@@ -28,7 +22,7 @@ let apps: InstalledApps[] = [
   // },
   {
     id: "explorer_process",
-    icon: "https://i.imgur.com/Whdx3HA.png",
+    icon: "/assets/app_icons/explorer.png",
     title: "Explorer",
     type: "thirdParty",
     coreComponentId: -1,
@@ -37,7 +31,7 @@ let apps: InstalledApps[] = [
   },
   {
     id: "browser_process",
-    icon: "https://i.imgur.com/NUu0Ysa.png",
+    icon: "/assets/app_icons/browser.png",
     title: "Browser",
     type: "thirdParty",
     coreComponentId: -1,
@@ -45,7 +39,7 @@ let apps: InstalledApps[] = [
   },
   {
     id: "calc_process",
-    icon: "https://i.imgur.com/V7W4MPv.png",
+    icon: "/assets/app_icons/calculator.png",
     title: "Calculator",
     type: "thirdParty",
     coreComponentId: -1,
@@ -54,7 +48,7 @@ let apps: InstalledApps[] = [
   },
   {
     id: "photopea_process",
-    icon: "https://i.imgur.com/UAGCLm7.png",
+    icon: "/assets/app_icons/photopea.png",
     title: "Photopea",
     type: "thirdParty",
     coreComponentId: -1,
@@ -62,7 +56,7 @@ let apps: InstalledApps[] = [
   },
   {
     id: "taskmanager_process",
-    icon: "https://i.imgur.com/4oiviWO.png",
+    icon: "/assets/app_icons/tasks.png",
     title: "Task Manager",
     type: "coreApp",
     coreComponentId: 1,
@@ -72,7 +66,7 @@ let apps: InstalledApps[] = [
 
 const start: InstalledApps = {
   id: "start_process",
-  icon: "https://i.imgur.com/20NiE9m.png",
+  icon:"/assets/start.png",
   title: "start",
   type: "core",
   coreComponentId: 0,
@@ -119,10 +113,9 @@ function Dock({ starStateCallBack }: DockProps) {
     dispatch(removeProcess(id));
   }
 
-  const setLaunchState = (processID:string,) => {
-    
-    dispatch(setMinimize({processID:processID}))
-  }
+  const setLaunchState = (processID: string) => {
+    dispatch(setMinimize({ processID: processID }));
+  };
 
   const [coreStatus, handleCore] = useCloseCore();
   const existsInAllProcesses = (app: InstalledApps) => {
@@ -177,16 +170,12 @@ function Dock({ starStateCallBack }: DockProps) {
                   } else {
                     if (!existsInAllProcesses(item)) {
                       handelLaunch(e, item);
-                      setLaunchState(item.id)
-                    }  else{
-
-                      setLaunchState(item.id)
-
-                      
+                      setLaunchState(item.id);
+                    } else {
+                      setLaunchState(item.id);
                     }
                     // else{
                     //   handelLaunch(e, item,windowStates.MINIMIZED);
-
 
                     // }
                   }
@@ -196,7 +185,9 @@ function Dock({ starStateCallBack }: DockProps) {
                   existsInAllProcesses(item) ? "bg-slate-700" : ""
                 }`}
               >
-                <img src={item.icon} alt="icon" />
+                <Image src={item.icon} alt="taskbarapp" width="64" height="64" />
+             
+                
               </button>
             </li>
           ))}

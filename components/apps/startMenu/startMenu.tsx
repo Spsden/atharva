@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import StartProjectDescription from "./startProjectDes";
-import { useCloseCore } from "../../../hooks/closeStartHook";
-import { useTransition } from "react-transition-state";
-import { Transition } from "@headlessui/react";
-import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
-import { RootState, selectProcess } from "../../utils/processes/store";
-import { InstalledApps } from "../../utils/processes/alltypes";
 
-const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
+import { useDetectClickOutside } from "react-detect-click-outside";
 
-export const StartMenu = () => {
+interface startMenuProps {
+  closeToggle: () => void;
+}
+export const StartMenu = ({closeToggle}:startMenuProps) => {
   const [currentProj, setcurrentProj] = useState<number>(0)
+  const ref = useDetectClickOutside({ onTriggered: closeToggle });
+
   
   // const [coreStatus, handleCore] = useCloseCore();
 
@@ -30,6 +29,7 @@ export const StartMenu = () => {
   return (
   
       <div
+      ref={ref}
         style={{
           zIndex: "100",
           backdropFilter: "blur(70px)",

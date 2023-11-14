@@ -3,27 +3,22 @@ import React from "react";
 import { useCloseCore } from "../../hooks/closeStartHook";
 import { InstalledApps } from "./processes/alltypes";
 
-const start:InstalledApps = {
+const start: InstalledApps = {
   id: "start_process",
   icon: "https://i.imgur.com/20NiE9m.png",
   title: "start",
   type: "core",
   coreComponentId: 0,
   appPageUrl: "http://www.google.com/",
-}
+};
 
 export default function BackgroundImage() {
-  const [coreStatus, handleCore] = useCloseCore();
-
-  function lol() {}
+  //function lol() {}
   return (
     <div
       onClick={() => {
-        console.log(coreStatus + "" + "yayyyyyy");
-
         // if(coreStatus){
-        handleCore(true,start);
-
+        // handleCore(true,start);
         //}
       }}
       style={{

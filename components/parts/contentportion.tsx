@@ -4,14 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import Window from "./windowManager/window";
 import { StartMenu } from "../apps/startMenu/startMenu";
 import { Transition } from "@headlessui/react";
-import store, { RootState, RootStates } from "../utils/reducers";
+import {  RootStates } from "../utils/reducers";
 import { removeProcess } from "../utils/reducers/processes";
 import { setMinimize } from "../utils/reducers/process_state";
 
 type contentAreaProps = {
   startState: boolean;
+  startToggle: () =>void
 };
-function ContentArea({ startState }: contentAreaProps) {
+function ContentArea({ startState,startToggle }: contentAreaProps) {
   const processes = useSelector((state: RootStates) => state.processes.list);
   const processState = useSelector((state: RootStates) => state.windowStates);
   console.log(processState);
@@ -48,7 +49,9 @@ function ContentArea({ startState }: contentAreaProps) {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <StartMenu />
+        <StartMenu  closeToggle={startToggle}/>
+
+
       </Transition>
 
       <div>

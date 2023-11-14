@@ -12,11 +12,14 @@ function Desktop() {
     console.log("start clciked", start)
     setstart(!start);
   }
+  const closeStart = () => {
+    setstart(false)
+  }
   return (
     <div  overflow-hidden="true">
       <BackgroundImage />
       <div className="text-white">
-        <ContentArea startState={start} />
+        <ContentArea startToggle={closeStart} startState={start} />
         <Dock starStateCallBack={handleStart}/>
       </div>
     </div>
