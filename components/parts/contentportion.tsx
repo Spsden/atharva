@@ -7,6 +7,7 @@ import { Transition } from "@headlessui/react";
 import {  RootStates } from "../utils/reducers";
 import { removeProcess } from "../utils/reducers/processes";
 import { removeFromProcessStates, setMinimize } from "../utils/reducers/process_state";
+import QuickSettingsMenu from "../apps/quickSettings/quickSettings";
 
 type contentAreaProps = {
   startState: boolean;
@@ -79,6 +80,8 @@ function ContentArea({ startState,startToggle }: contentAreaProps) {
           ))}
         </ul>
       </div>
+
+      <QuickSettingsMenu/>
     </div>
   );
 }

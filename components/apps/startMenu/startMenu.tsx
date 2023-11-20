@@ -6,81 +6,64 @@ import { useDetectClickOutside } from "react-detect-click-outside";
 interface startMenuProps {
   closeToggle: () => void;
 }
-export const StartMenu = ({closeToggle}:startMenuProps) => {
-  const [currentProj, setcurrentProj] = useState<number>(0)
+export const StartMenu = ({ closeToggle }: startMenuProps) => {
+  const [currentProj, setcurrentProj] = useState<number>(0);
   const ref = useDetectClickOutside({ onTriggered: closeToggle });
 
-  
   // const [coreStatus, handleCore] = useCloseCore();
 
- 
   const currentProjHandler = (index: number) => {
     setcurrentProj(index);
   };
 
-
-
-  
- 
-
-  
-
-
   return (
-  
-      <div
+    <div
       ref={ref}
-        style={{
-          zIndex: "100",
-          backdropFilter: "blur(70px)",
-        }}
-        className={`w-5/12 h-4/6 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 
+      style={{
+        zIndex: "100",
+        backdropFilter: "blur(70px)",
+      }}
+      className={`w-5/12 h-4/6 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 
       }`}
-      >
-  
-        <div className="w-2/5 float-left overflow-auto h-full">
-          <div className="sticky top-0 bg-red-900  ">
-            <h2>Projects</h2>
-          </div>
-          <ul className="">
-            {allProjects.map(
-              (
-                item: {
-                  id: string;
-                  icon: string;
-                  githubUrl: string;
-                  title: string;
-                  description: string;
-                },
-                i: number
-              ) => (
-                <li
-                  key={i}
-                  className="m-3 hover:bg-sky-700"
-                  onClick={() => {
-                    currentProjHandler(i);
-                  }}
-                >
-                  <div className="flex space-x-2">
-                    <img
-                      className="h-10 rounded-lg"
-                      src={item.icon}
-                      alt="icon"
-                    />
-                    <p>{item.title}</p>
-                  </div>
-                </li>
-              )
-            )}
-          </ul>
+    >
+      <div className="w-2/5 float-left overflow-auto h-full">
+        <div className="sticky top-0 bg-red-900  ">
+          <h2>Projects</h2>
         </div>
-
-        <div className=" overflow-auto h-full  ">
-          <StartProjectDescription {...allProjects[currentProj]} />
-          {/* <div>{TechStackList[0].path}</div> */}
-        </div>
+        <ul className="">
+          {allProjects.map(
+            (
+              item: {
+                id: string;
+                icon: string;
+                githubUrl: string;
+                title: string;
+                description: string;
+              },
+              i: number
+            ) => (
+              <li
+                key={i}
+                className="m-3 hover:bg-sky-700"
+                onClick={() => {
+                  currentProjHandler(i);
+                }}
+              >
+                <div className="flex space-x-2">
+                  <img className="h-10 rounded-lg" src={item.icon} alt="icon" />
+                  <p>{item.title}</p>
+                </div>
+              </li>
+            )
+          )}
+        </ul>
       </div>
-  
+
+      <div className=" overflow-auto h-full  ">
+        <StartProjectDescription {...allProjects[currentProj]} />
+        {/* <div>{TechStackList[0].path}</div> */}
+      </div>
+    </div>
   );
 };
 
