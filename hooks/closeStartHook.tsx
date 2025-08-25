@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, addProcess, removeProcess } from "../components/utils/processes/store";
-import { InstalledApps } from "../components/utils/processes/alltypes";
+import { addProcess, removeProcess } from "../store/features/processes/processesSlice";
+import { InstalledApps } from "../types/alltypes";
 
 export const useCloseCore = ()  => {
   const [coreStatus, toggleCore] = useState<boolean>(false);

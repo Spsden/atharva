@@ -1,6 +1,6 @@
 import { combineReducers, configureStore, createStore } from "@reduxjs/toolkit";
-import { processReducers, runningProcessesSlice } from "./processes";
-import { windowStateReducers, windowStatesSlice } from "./process_state";
+import { processReducers, runningProcessesSlice } from "./features/processes/processesSlice";
+import { windowStateReducers } from "./features/windowStates/windowStatesSlice";
 
 interface RootStates {
   processes: ReturnType<typeof processReducers>;

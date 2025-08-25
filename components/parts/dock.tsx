@@ -2,13 +2,13 @@ import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
-import { InstalledApps } from "../utils/processes/alltypes";
 
 import { useCloseCore } from "../../hooks/closeStartHook";
-import { RootStates } from "../utils/reducers";
-import { addProcess, removeProcess } from "../utils/reducers/processes";
-import { setMinimize } from "../utils/reducers/process_state";
+import { RootStates } from "../../store/store";
+import { addProcess, removeProcess } from "../../store/features/processes/processesSlice";
 import Image from 'next/image'
+import { InstalledApps } from "../../types/alltypes";
+import { setMinimize } from "../../store/features/windowStates/windowStatesSlice";
 
 //const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 let apps: InstalledApps[] = [

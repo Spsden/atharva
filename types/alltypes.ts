@@ -1,7 +1,7 @@
 import { Interface } from "readline";
-import { StartMenu } from "../../apps/startMenu/startMenu";
-import TaskManager from "../../apps/taskManager";
 import React, { ReactNode } from "react";
+import TaskManager from "../components/apps/taskManager";
+import { StartMenu } from "../components/apps/startMenu/startMenu";
 
 
 

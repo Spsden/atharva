@@ -1,7 +1,7 @@
 import React from "react";
 // import { RootState, selectProcess } from "../utils/processes/store";
 import { TypedUseSelectorHook, useSelector, useDispatch } from "react-redux";
-import { RootStates } from "../utils/reducers";
+import { RootStates } from "../../store/store";
 
 // const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 

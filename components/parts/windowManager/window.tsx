@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import dynamic from "next/dynamic";
-import { listOfReactAppFunctions } from "../../utils/processes/alltypes";
 import { WinBoxControlInfo } from "react-winbox";
 import { useCloseCore } from "../../../hooks/closeStartHook";
+import { listOfReactAppFunctions } from "../../../types/alltypes";
 
 const WinBox = dynamic(() => import("react-winbox"), { ssr: false });
 

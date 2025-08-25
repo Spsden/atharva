@@ -1,5 +1,5 @@
 import { PayloadAction, combineReducers, configureStore, createSlice } from "@reduxjs/toolkit";
-import { InstalledApps } from "../processes/alltypes";
+import { InstalledApps } from "../../../components/utils/processes/alltypes";
 
 type runningProcesses = {
   list: InstalledApps[];

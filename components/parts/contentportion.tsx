@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Window from "./windowManager/window";
 import { StartMenu } from "../apps/startMenu/startMenu";
 import { Transition } from "@headlessui/react";
-import {  RootStates } from "../utils/reducers";
-import { removeProcess } from "../utils/reducers/processes";
-import { removeFromProcessStates, setMinimize } from "../utils/reducers/process_state";
+import {  RootStates } from "../../store/store";
+import { removeProcess } from "../../store/features/processes/processesSlice";
+import { removeFromProcessStates, setMinimize } from "../../store/features/windowStates/windowStatesSlice";
 import QuickSettingsMenu from "../apps/quickSettings/quickSettings";
 
 type contentAreaProps = {
