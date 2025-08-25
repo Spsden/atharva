@@ -1,71 +1,98 @@
-import React, { useEffect, useState } from "react";
-import StartProjectDescription from "./startProjectDes";
 
-import { useDetectClickOutside } from "react-detect-click-outside";
+import React from "react";
+import onClickOutside from "react-onclickoutside";
+import { Transition } from "@headlessui/react";
+import StartProjectDescription from "./startProjectDes";
 
 interface startMenuProps {
   closeToggle: () => void;
+  startState: boolean;
 }
-export const StartMenu = ({ closeToggle }: startMenuProps) => {
-  const [currentProj, setcurrentProj] = useState<number>(0);
-  const ref = useDetectClickOutside({ onTriggered: closeToggle });
 
-  // const [coreStatus, handleCore] = useCloseCore();
+interface StartMenuState {
+  currentProj: number;
+}
 
-  const currentProjHandler = (index: number) => {
-    setcurrentProj(index);
+class StartMenu extends React.Component<startMenuProps, StartMenuState> {
+  constructor(props: startMenuProps) {
+    super(props);
+    this.state = {
+      currentProj: 0,
+    };
+  }
+
+  handleClickOutside = () => {
+    this.props.closeToggle();
   };
 
-  return (
-    <div
-      ref={ref}
-      style={{
-        zIndex: "100",
-        backdropFilter: "blur(70px)",
-      }}
-      className={`w-5/12 h-4/6 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 
-      }`}
-    >
-      <div className="w-2/5 float-left overflow-auto h-full">
-        <div className="sticky top-0 bg-red-900  ">
-          <h2>Projects</h2>
-        </div>
-        <ul className="">
-          {allProjects.map(
-            (
-              item: {
-                id: string;
-                icon: string;
-                githubUrl: string;
-                title: string;
-                description: string;
-              },
-              i: number
-            ) => (
-              <li
-                key={i}
-                className="m-3 hover:bg-sky-700"
-                onClick={() => {
-                  currentProjHandler(i);
-                }}
-              >
-                <div className="flex space-x-2">
-                  <img className="h-10 rounded-lg" src={item.icon} alt="icon" />
-                  <p>{item.title}</p>
-                </div>
-              </li>
-            )
-          )}
-        </ul>
-      </div>
+  currentProjHandler = (index: number) => {
+    this.setState({ currentProj: index });
+  };
 
-      <div className=" overflow-auto h-full  ">
-        <StartProjectDescription {...allProjects[currentProj]} />
-        {/* <div>{TechStackList[0].path}</div> */}
-      </div>
-    </div>
-  );
-};
+  render() {
+    return (
+      <Transition
+        show={this.props.startState}
+        enter="transition-opacity ease-linear duration-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity ease-linear duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <div
+          style={{
+            zIndex: "100",
+            backdropFilter: "blur(70px)",
+          }}
+          className={`w-5/12 h-4/6 m-2 absolute  bottom-16 rounded-lg bg-stone-800/50 
+      }`}
+        >
+          <div className="w-2/5 float-left overflow-auto h-full">
+            <div className="sticky top-0 bg-red-900  ">
+              <h2>Projects</h2>
+            </div>
+            <ul className="">
+              {allProjects.map(
+                (
+                  item: {
+                    id: string;
+                    icon: string;
+                    githubUrl: string;
+                    title: string;
+                    description: string;
+                  },
+                  i: number
+                ) => (
+                  <li
+                    key={i}
+                    className="m-3 hover:bg-sky-700"
+                    onClick={() => {
+                      this.currentProjHandler(i);
+                    }}
+                  >
+                    <div className="flex space-x-2">
+                      <img
+                        className="h-10 rounded-lg"
+                        src={item.icon}
+                        alt="icon"
+                      />
+                      <p>{item.title}</p>
+                    </div>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+
+          <div className=" overflow-auto h-full  ">
+            <StartProjectDescription {...allProjects[this.state.currentProj]} />
+          </div>
+        </div>
+      </Transition>
+    );
+  }
+}
 
 export interface Project {
   id: string;
@@ -122,7 +149,7 @@ export let allProjects: Project[] = [
     githubUrl: "www.github.com/Spsden/drip",
     title: "RushApi",
     techStack: [],
-    icon: "https://i.imgur.com/sLlB7Qj.png",
+    icon: "https.i.imgur.com/sLlB7Qj.png",
     description: "lorem ipsum RushApi",
   },
   {
@@ -141,45 +168,6 @@ export let allProjects: Project[] = [
     icon: "https://i.imgur.com/L3Ip1wh.png",
     description: "lorem ipsum Daraz",
   },
-
-  // {
-  //   id: "1",
-  //   githubUrl: "www.github.com/Spsden/drip",
-  //   title: "Drip",
-  //   techStack: [],
-  //   icon: "https://i.imgur.com/L3Ip1wh.png",
-  //   description: "lorem ipsum drip",
-  // },
-  // {
-  //   id: "2",
-  //   githubUrl: "www.github.com/Spsden/drip",
-  //   title: "Jott Notes",
-  //   techStack: [],
-  //   icon: "https://i.imgur.com/p4vbIoE.png",
-  //   description: "lorem ipsum Jott Notes",
-  // },
-  // {
-  //   id: "3",
-  //   githubUrl: "www.github.com/Spsden/drip",
-  //   title: "RushApi",
-  //   techStack: [],
-  //   icon: "https://i.imgur.com/sLlB7Qj.png",
-  //   description: "lorem ipsum RushApi",
-  // },
-  // {
-  //   id: "4",
-  //   githubUrl: "www.github.com/Spsden/drip",
-  //   title: "Obsy",
-  //   techStack: [],
-  //   icon: "https://i.imgur.com/nEgIj0U.png",
-  //   description: "lorem ipsum Obsy",
-  // },
-  // {
-  //   id: "5",
-  //   githubUrl: "www.github.com/Spsden/drip",
-  //   title: "Daraz",
-  //   techStack: [],
-  //   icon: "https://i.imgur.com/L3Ip1wh.png",
-  //   description: "lorem ipsum Daraz",
-  // },
 ];
+
+export default onClickOutside(StartMenu);

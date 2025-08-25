@@ -1,4 +1,5 @@
-@tailwind base;
+@import "tailwindcss";
+
 :root {
     --primary: transparent;
     --secondary: cornflowerblue;

@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Window from "./windowManager/window";
-import { StartMenu } from "../apps/startMenu/startMenu";
+import StartMenu from "../apps/startMenu/startMenu";
 import { Transition } from "@headlessui/react";
 import {  RootStates } from "../../store/store";
 import { removeProcess } from "../../store/features/processes/processesSlice";
@@ -42,19 +42,7 @@ function ContentArea({ startState,startToggle }: contentAreaProps) {
     <div>
       {/* <ContextMenu /> */}
 
-      <Transition
-        show={startState}
-        enter="transition-opacity ease-linear duration-300"
-        enterFrom="opacity-0"
-        enterTo="opacity-100"
-        leave="transition-opacity ease-linear duration-300"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
-      >
-        <StartMenu  closeToggle={startToggle}/>
-
-
-      </Transition>
+      {startState && <StartMenu closeToggle={startToggle} startState={startState} />}
 
       <div>
         <ul>
