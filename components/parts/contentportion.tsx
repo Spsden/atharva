@@ -2,21 +2,18 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Window from "./windowManager/window";
-import StartMenu from "../apps/startMenu/startMenu";
+import { StartMenu } from "../apps/startMenu/startMenu";
 import { Transition } from "@headlessui/react";
 import {  RootStates } from "../../store/store";
 import { removeProcess } from "../../store/features/processes/processesSlice";
 import { removeFromProcessStates, setMinimize } from "../../store/features/windowStates/windowStatesSlice";
 import QuickSettingsMenu from "../apps/quickSettings/quickSettings";
 
-type contentAreaProps = {
-  startState: boolean;
-  startToggle: () =>void
-};
-function ContentArea({ startState,startToggle }: contentAreaProps) {
+
+function ContentArea() {
+  const { isStartMenuOpen } = useSelector((state: RootStates) => state.ui);
   const processes = useSelector((state: RootStates) => state.processes.list);
-  const processState = useSelector((state: RootStates) => state.windowStates);
-  console.log(processState);
+  const windowState = useSelector((state: RootStates) => state.windowStates);
 
   const dispatch = useDispatch();
 
@@ -32,17 +29,18 @@ function ContentArea({ startState,startToggle }: contentAreaProps) {
   }
 
   const isAppMinimized = (processID: string): boolean => {
-    const windowState = processState.list.find(
+    const currentWindowState = windowState.list.find(
       (state) => state.processID === processID
     );
-    return windowState?.isMinimized ?? false;
+    return currentWindowState?.isMinimized ?? false;
   };
+        console.log(isStartMenuOpen,"dwhusgxhug")
+
 
   return (
     <div>
-      {/* <ContextMenu /> */}
 
-      {startState && <StartMenu closeToggle={startToggle} startState={startState} />}
+      {isStartMenuOpen && <StartMenu />}
 
       <div>
         <ul>

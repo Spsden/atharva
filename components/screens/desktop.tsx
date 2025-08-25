@@ -5,22 +5,12 @@ import BackgroundImage from "../utils/background";
 
 
 function Desktop() {
-
-  const [start, setstart] = useState(false)
-
-  const handleStart = () => {
-    console.log("start clciked", start)
-    setstart(!start);
-  }
-  const closeStart = () => {
-    setstart(false)
-  }
   return (
     <div  overflow-hidden="true">
       <BackgroundImage />
       <div className="text-white">
-        <ContentArea startToggle={closeStart} startState={start} />
-        <Dock starStateCallBack={handleStart}/>
+        <ContentArea />
+        <Dock />
       </div>
     </div>
   );
