@@ -23,7 +23,7 @@ export interface AppManifest {
 
 export interface DynamicApp {
   manifest: AppManifest;
-  component: React.ComponentType<AppProps>;
+component: React.ComponentType<AppProps>;
   isLoaded: boolean;
   bundle?: string; 
 }

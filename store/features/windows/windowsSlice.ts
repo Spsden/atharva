@@ -31,7 +31,10 @@ export const windowsSlice = createSlice({
                 isResizable: manifest.defaultWindow?.resizable ?? true,
                 position: { x: 100, y: 100 },
                 size: { width: manifest.defaultWindow?.width ?? 800, height: manifest.defaultWindow?.height ?? 600 },
-                zIndex: state.focusOrder.length + 1
+                zIndex: state.focusOrder.length + 1,
+                originalPosition: { x: 100, y: 100 },
+                originalSize: { width: manifest.defaultWindow?.width ?? 800, height: manifest.defaultWindow?.height ?? 600 }
+
             };
             state.focusOrder.push(windowId);
         },

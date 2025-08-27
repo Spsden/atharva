@@ -36,14 +36,13 @@ const WindowManager: React.FC = () => {
         const app: DynamicApp = dynamicApps[process.appId];
 
         return (
-            <div>lll</div>
-        //   <div key={window.windowId} className="pointer-events-auto" style={{ zIndex: window.zIndex }}>
-        //     <EnhancedWindow
-        //       windowId={window.windowId}
-        //       appComponent={app.component}
-        //       onClose={() => handleWindowClose(window.windowId)}
-        //     />
-        //   </div>
+          <div key={window.windowId} className="pointer-events-auto" style={{ zIndex: window.zIndex }}>
+            <EnhancedWindow
+              windowId={window.windowId}
+              appComponent={app.component}
+              onClose={() => handleWindowClose(window.windowId)}
+            />
+          </div>
         );
       })}
     </div>

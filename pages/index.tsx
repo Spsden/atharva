@@ -11,7 +11,6 @@ const Home: NextPage = () => {
   return (
 
     <Provider store={store}>
-      <div>hi</div>
       <Desktop/>
 
     </Provider>

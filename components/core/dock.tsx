@@ -7,9 +7,9 @@ import { toggleStartMenu, closeStartMenu } from "../../store/features/ui/uiSlice
 // Installed Apps List
 import { appsSlice, loadDynamicApp, startProcess } from "../../store/features/apps/appsSlice";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { createWindow, focusWindow } from "./WindowComponent";
 import { installApp } from "../../services/FileSystemService";
 import { AppManifest } from "../../types/appManifest";
+import { createWindow, focusWindow } from "../../store/features/windows/windowsSlice";
 
 // These are hardcoded as they are part of the OS shell.
 const coreApps: AppManifest[] = [
@@ -45,11 +45,13 @@ function Dock() {
     const existingProcess = Object.values(runningProcesses).find(
       (p) => p.appId === appManifest.id
     )
-    console.log(installedApps);
+    console.log(installedApps,"sdfxcghvjbk");
+    console.log(existingProcess,"rtyhj");
 
 
 
     if (existingProcess) {
+      console.log("exists");
       const existingWindow = Object.values(windows).find(
         (w) => w.processId === existingProcess?.processId
       )
