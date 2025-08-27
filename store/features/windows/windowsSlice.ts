@@ -91,5 +91,19 @@ export const windowsSlice = createSlice({
     }
 });
 
+export const { 
+  createWindow, 
+  closeWindow, 
+  minimizeWindow, 
+  maximizeWindow, 
+  restoreWindow, 
+  focusWindow,
+  updateWindowPosition,
+  updateWindowSize,
+  updateWindowTitle,
+  updateWindowIcon
+} = windowsSlice.actions;
+
+
 
 export default windowsSlice.reducer

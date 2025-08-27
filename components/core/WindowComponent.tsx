@@ -101,21 +101,4 @@ export const EnhancedWindow: React.FC<EnhancedWindowProps> = ({
 };
 
 // Export actions
-export const { 
-  createWindow, 
-  closeWindow, 
-  minimizeWindow, 
-  maximizeWindow, 
-  restoreWindow, 
-  focusWindow,
-  updateWindowPosition,
-  updateWindowSize,
-  updateWindowTitle,
-  updateWindowIcon
-} = windowsSlice.actions;
 
-export const { 
-  setStorageItem, 
-  removeStorageItem, 
-  clearStorage 
-} = storageSlice.actions;

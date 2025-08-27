@@ -38,3 +38,10 @@ export const storageSlice = createSlice({
     }
   }
 });
+
+
+export const { 
+  setStorageItem, 
+  removeStorageItem, 
+  clearStorage 
+} = storageSlice.actions;
