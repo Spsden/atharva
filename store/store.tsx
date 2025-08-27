@@ -1,26 +1,23 @@
-import { combineReducers, configureStore, createStore } from "@reduxjs/toolkit";
-import { processReducers, runningProcessesSlice } from "./features/processes/processesSlice";
-import { windowStateReducers } from "./features/windowStates/windowStatesSlice";
-import uiReducer from "./features/ui/uiSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import appsReducer from './features/apps/appsSlice';
+import filesystemReducer from './features/filesystem/fileSystemSlice';
+import windowsReducer from './features/windows/windowsSlice';
+import uiReducer from './features/ui/uiSlice'
 
-interface RootStates {
-  processes: ReturnType<typeof processReducers>;
-  windowStates: ReturnType<typeof windowStateReducers>;
-  ui: ReturnType<typeof uiReducer>;
-}
-
-export type { RootStates };
-
-const allReducers = combineReducers({
-  processes: processReducers,
-  windowStates: windowStateReducers,
-  ui: uiReducer,
+// CONNECTED: This file combines all the reducers into a single Redux store.
+export const store = configureStore({
+  reducer: {
+    apps: appsReducer,
+    filesystem: filesystemReducer,
+    windows: windowsReducer,
+    ui:uiReducer
+  },
+  // To handle non-serializable data like Date objects in filesystem state
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
-var store = configureStore({
-  reducer: allReducers,
-});
-
-export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
-export default store;
+export type AppDispatch = typeof store.dispatch;

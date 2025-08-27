@@ -1,0 +1,21 @@
+{
+  "id": "browser",
+  "name": "Browser",
+  "version": "1.0.0",
+  "icon": "https://cdn-icons-png.flaticon.com/512/2764/2764444.png",
+  "description": "A simple web browser application that allows users to navigate the web, manage browsing history, and bookmark favorite sites.",
+  "type": "dynamic",
+  "main": "BrowserApp.tsx",
+  "dependencies": [
+    "react"
+  ],
+  "minSystemVersion": "1.0.0",
+  "defaultWindow": {
+    "width": 1024,
+    "height": 768,
+    "resizable": true,
+    "movable": true,
+    "minimizable": true,
+    "maximizable": true
+  }
+}

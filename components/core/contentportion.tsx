@@ -6,7 +6,7 @@ import { StartMenu } from "../apps/startMenu/startMenu";
 import { Transition } from "@headlessui/react";
 import {  RootStates } from "../../store/store";
 import { removeProcess } from "../../store/features/processes/processesSlice";
-import { removeFromProcessStates, setMinimize } from "../../store/features/windowStates/windowStatesSlice";
+import { removeFromProcessStates, setMinimize } from "../../store/features/windows/windowStatesSlice";
 import QuickSettingsMenu from "../apps/quickSettings/quickSettings";
 
 

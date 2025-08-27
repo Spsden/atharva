@@ -4,16 +4,26 @@ import { Provider } from "react-redux";
 
 
 import Desktop from "../components/screens/desktop";
-import store from "../store/store";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import { store } from "../store/store";
 
 const Home: NextPage = () => {
   return (
+
     <Provider store={store}>
-      <Desktop />
+      <div>hi</div>
+      <Desktop/>
 
     </Provider>
-  )
+      // <Provider store={store}>
+      //   {/* <PersistGate loading={<LoadingScreen />} persistor={persistor}> */}
+      //     <Desktop />
+      //   {/* </PersistGate> */}
+      // </Provider>
+    // </ErrorBoundary>
+  );
 };
+
 
 
 

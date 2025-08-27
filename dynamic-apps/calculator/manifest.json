@@ -1,0 +1,21 @@
+{
+  "id": "calculator",
+  "name": "Calculator",
+  "version": "1.0.0",
+  "icon": "https://cdn-icons-png.flaticon.com/512/3713/3713932.png",
+  "description": "A simple calculator application for basic arithmetic operations.",
+  "type": "dynamic",
+  "main": "CalculatorApp.tsx",
+  "dependencies": [
+    "react"
+  ],
+  "minSystemVersion": "1.0.0",
+  "defaultWindow": {
+    "width": 400,
+    "height": 600,
+    "resizable": false,
+    "movable": true,
+    "minimizable": true,
+    "maximizable": false
+  }
+}
