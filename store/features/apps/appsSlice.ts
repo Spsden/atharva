@@ -102,6 +102,7 @@ export const appsSlice = createSlice({
             };
         },
         killProcess: (state, action: PayloadAction<string>) => {
+            console.log("killing starts");
             delete state.runningProcesses[action.payload];
         },
         updateAppStore: (state, action: PayloadAction<AppManifest[]>) => {

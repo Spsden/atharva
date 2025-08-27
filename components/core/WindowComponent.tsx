@@ -71,6 +71,8 @@ export const EnhancedWindow: React.FC<EnhancedWindowProps> = ({
       noFull={!windowState.isResizable}
       customControls={customControls}
       onClose={onClose}
+      onFullscreen={() =>{console.log("fullscreen pressed");}}
+
       onMove={(x, y) => {
         dispatch(windowsSlice.actions.updateWindowPosition({
           windowId,

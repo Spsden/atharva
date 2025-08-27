@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { RootState } from "../../../store/store";
 import { EnhancedWindow } from "../WindowComponent";
-import appsSlice from "../../../store/features/apps/appsSlice";
+import { killProcess } from "../../../store/features/apps/appsSlice";
 import { windowsSlice } from "../../../store/features/windows/windowsSlice";
 import { DynamicApp } from "../../../types/appManifest";
 
@@ -12,18 +12,17 @@ import { DynamicApp } from "../../../types/appManifest";
 const WindowManager: React.FC = () => {
   const dispatch = useDispatch();
   const { windows } = useSelector((state: RootState) => state.windows);
-  const { runningProcesses, dynamicApps } = useSelector((state: RootState) => state.apps);
+  const { runningProcesses, dynamicApps} = useSelector((state: RootState) => state.apps);
 
   const handleWindowClose = (windowId: string) => {
     const windowToClose = windows[windowId];
     if (windowToClose) {
       // Dispatch actions to kill the process and close the window
-      dispatch(appsSlice.action.killProcess(windowToClose.processId));
+      dispatch(killProcess(windowToClose.processId));
       dispatch(windowsSlice.actions.closeWindow(windowId));
     }
   };
   console.log(runningProcesses);
-  console.log(appsSlice.action);
 
   return (
     <div className="absolute inset-0 pointer-events-none">
